@@ -1,7 +1,7 @@
 require("dotenv").config();
 const cors = require("cors");
-const websiteRouter = require("./routes/website");
-const product = require("./routes/product");
+const categoryRouter = require("./routes/category");
+const productRouter  = require("./routes/product");
 const express = require("express");
 require("./mongo-connection");
 
@@ -13,8 +13,8 @@ app.use(cors({
 app.use(express.json());
 app.use("/", express.static("./public"));
 
-app.use("/website", websiteRouter);
-app.use("/product", product);
+app.use("/category", categoryRouter);
+app.use("/product", productRouter);
 
 app.get("/", (req, res) => {
   res.render("index.html");
