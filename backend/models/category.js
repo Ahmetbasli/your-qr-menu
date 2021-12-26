@@ -4,7 +4,7 @@ const Product = require('./product');
 const CategorySchema = new mongoose.Schema({
   categoryImage: {type: String},
   title: {type: String, required: true},
-  product: [{
+  products: [{
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'Product',
     autopopulate: {
