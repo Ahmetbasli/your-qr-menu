@@ -28,6 +28,8 @@ router.put('/update/:id', async (req, res)=> {
 
 
 router.delete('/delete/:id', async (req, res)=> {
+  const category = await CategoryService.find(req.params.id)
+
   const { id } = req.params;
   await CategoryService.del({ _id: id })
   res.send('Got a DELETE request at /user')

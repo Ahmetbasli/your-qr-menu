@@ -9,10 +9,10 @@
       }
     </style>
     <script>
-      console.log("hello there 👋");
-      console.log('fjkdsajflsjdafkl')
+      // console.log("hello there 👋");
+      // console.log('fjkdsajflsjdafkl')
       const post = async ()=>{
-        const categories = await axios.get( 'http://localhost:3000/category/all')
+        const categories = await axios.get('https://your-qr-menu-backend.herokuapp.com/category/all')
         console.log(categories)
       }
       post()
