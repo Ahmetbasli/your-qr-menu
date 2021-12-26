@@ -1,16 +1,13 @@
 const mongoose = require("mongoose");
 
-const WebsiteSchema = new mongoose.Schema({
-  analyticsDatas: [
-    /*  {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "AnalyticsData",
-    }, */
-  ],
-  origin: String,
-  url: String,
+const ProductSchema = new mongoose.Schema({
+  productImage: {type: String},
+  title: {type: String, required: true},
+  description: {type: String},
+  productPrice: {type: String, required: true},
 });
 
-const WebsiteModel = mongoose.model("Website", WebsiteSchema);
 
-module.exports = WebsiteModel;
+const ProductModel = mongoose.model("Product", ProductSchema);
+
+module.exports = ProductModel;

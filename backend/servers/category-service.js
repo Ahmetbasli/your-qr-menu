@@ -1,8 +1,8 @@
 const BaseService = require("./base-service");
-const MeetupModel = require("../models/meetup");
+const CategoryModel = require("../models/category");
 
-class MeetupService extends BaseService {
-  model = MeetupModel;
+class CategoryService extends BaseService {
+  model = CategoryModel;
 }
 
-module.exports = new MeetupService();
+module.exports = new CategoryService();

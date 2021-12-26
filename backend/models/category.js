@@ -1,10 +1,19 @@
 const mongoose = require("mongoose");
 
-const AnalyticsDataSchema = new mongoose.Schema({
-  
-  title:String
+const CategorySchema = new mongoose.Schema({
+  categoryImage: {type: String},
+  title: {type: String, required: true},
+  product: [{
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'Product',
+    autopopulate: {
+        maxDepth: 1
+    }
+}]
 });
 
-const AnalyticsDataModel = mongoose.model("AnalyticsData", AnalyticsDataSchema);
+CategorySchema.plugin(require('mongoose-autopopulate'))
 
-module.exports = AnalyticsDataModel;
+const CategoryModel = mongoose.model("Category", CategorySchema);
+
+module.exports = CategoryModel;
