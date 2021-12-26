@@ -24,8 +24,6 @@ router.post("/create/:categoryId", upload.single('productImage'),  async (req, r
 router.put('/update/:id', async (req, res)=> {
     const product = await ProductService.find(req.params.id)
     const data = req.body
-    console.log(product);
-    console.log(data);
 
     ProductService.update(product, data)
     res.send('Got a update request at /user')

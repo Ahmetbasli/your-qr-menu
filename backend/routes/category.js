@@ -15,7 +15,6 @@ router.post("/create", upload.single('categorytImage'),  async (req, res) => {
       categorytImage: req.file?.path,
       products: []
   }
-  console.log(data);
   await CategoryService.add(data)
   res.send('Got a create request at /user')
 });
