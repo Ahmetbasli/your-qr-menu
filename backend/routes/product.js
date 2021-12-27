@@ -5,8 +5,9 @@ const upload = require("../multer");
 const ProductService = require("../servers/product-service");
 const CategoryService = require("../servers/category-service");
 
-
   
+  
+
 router.post("/create/:categoryId", upload.single('productImage'),  async (req, res) => {
     const data = {
         producttImage: req.file?.path,
