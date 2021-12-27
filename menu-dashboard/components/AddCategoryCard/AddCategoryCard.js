@@ -36,14 +36,12 @@ const AddCategoryCard = () => {
     return (
         <>
             <Card  className={styles.card}   sx={{ minWidth: 300, minHeight: 400}}  >
-                <ButtonBase sx={{ width: '100%', height: '100%'} }
-                onClick={handleClickOpen}
-                >
-                 <Fab color="primary" size="large" variant="extended"  aria-label="add">
+                
+                 <Fab 
+                    onClick={handleClickOpen} color="primary" size="large" variant="extended"  aria-label="add">
                     <AddIcon sx={{ mr: 1 }}  />
                     Yeni Kategori Ekle
                 </Fab>
-                </ButtonBase>
             </Card>
             <AddCategoryModal openModal={openModal} setOpenModal={setOpenModal}/>
         </>

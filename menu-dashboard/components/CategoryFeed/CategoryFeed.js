@@ -11,31 +11,34 @@ const CategoryFeed = ({ categories }) => {
  
     return (
         <div   className={styles.productFeed}>
-            {/* <Grid 
+            <Grid 
             container spacing={{xs:4}}  
             >
                 <Grid
                     item xs={12}
                     md={4} 
                     container 
+                    alignItems="center"
                     justifyContent="center"
                     >
                     <AddCategoryCard />
                 </Grid>
-                {categories && categories.map((category)=>{
+                {!!categories && categories.map((category)=>{
                     
                     return  (
                         <Grid
+                        key={category._id}
                         item xs={12}
                         md={4} 
                         container 
+                        alignItems="center"
                         justifyContent="center"
                         >
-                            <CategoryCard item key={category._id} title={category.title} image={category?.img} />
+                            <CategoryCard item  title={category.title} image={category?.img} />
                         </Grid>
                     )
                 })}
-            </Grid> */}
+            </Grid>
         </div>
     )
 }

@@ -1,8 +1,9 @@
 .card{
     background: none;
     border: 2px dashed black;
-    z-index: 100px;
-    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .card:hover{
    /* background: red; */
