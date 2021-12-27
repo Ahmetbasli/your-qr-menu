@@ -1,3 +1,9 @@
 .icon {
   @apply w-12 h-12 text-gray-400 group-hover:text-gray-600;
 }
+.extentionDescription {
+  @apply text-xs;
+}
+.wrapper {
+  margin-bottom: 10px;
+}

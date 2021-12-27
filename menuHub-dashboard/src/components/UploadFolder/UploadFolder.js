@@ -4,8 +4,14 @@ import styles from "./UploadFolder.module.css";
 import { Typography } from "@mui/material";
 const UploadFolder = () => {
   return (
-    <>
-      <Typography variant="p" component="div" align="center" gutterBottom>
+    <div className={styles.wrapper}>
+      <Typography
+        variant="p"
+        className={styles.extentionDescription}
+        component="div"
+        align="center"
+        gutterBottom
+      >
         .jpg .png veya .jpeg Uzantılı dosyalar kabul edilir.
       </Typography>
       <div className="flex items-center justify-center w-full">
@@ -19,7 +25,7 @@ const UploadFolder = () => {
           <input type="file" className="opacity-0" />
         </label>
       </div>
-    </>
+    </div>
   );
 };
 
