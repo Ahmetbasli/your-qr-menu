@@ -24,7 +24,6 @@ const CategoryFeed = ({ categories }) => {
                     <AddCategoryCard />
                 </Grid>
                 {!!categories && categories.map((category)=>{
-                    
                     return  (
                         <Grid
                         key={category._id}

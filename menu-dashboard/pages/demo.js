@@ -7,7 +7,7 @@ import Title from '../components/Title/Title'
 //styles
 import styles from '../styles/Demo.module.css'
 
-const Demo = ({ data: categories }) => {
+const Demo = ({ data: categories={} }) => {
     return (
         <main className={styles.main}>
           <Header/>
