@@ -11,7 +11,7 @@ const CategoryFeed = ({ categories }) => {
  
     return (
         <div   className={styles.productFeed}>
-            <Grid 
+            {/* <Grid 
             container spacing={{xs:4}}  
             >
                 <Grid
@@ -35,7 +35,7 @@ const CategoryFeed = ({ categories }) => {
                         </Grid>
                     )
                 })}
-            </Grid>
+            </Grid> */}
         </div>
     )
 }

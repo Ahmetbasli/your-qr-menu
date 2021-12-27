@@ -6,7 +6,7 @@ import styles from './Header.module.css'
 const Header = () => {
     return (
         <div className={styles.header}>
-            Am'lara gerektiğinden fazla değer verme. Pembe amın bile gölgesi siyahtır
+           {" Am'lara gerektiğinden fazla değer verme. Pembe amin bile gölgesi siyahtir"}
         </div>
     )
 }
