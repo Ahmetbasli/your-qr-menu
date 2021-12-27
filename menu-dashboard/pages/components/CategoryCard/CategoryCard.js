@@ -8,22 +8,22 @@ import { CardActionArea } from '@mui/material';
 
 console.log('ahmet')
 function CategoryCard({title}) {
-    return (
-        <Card sx={{ maxWidth: 345 }}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image='/'
-            alt="green iguana"
-          />
-          <CardContent >
-            <Typography gutterBottom variant="h5" align="center"  component="div">
-            {title}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+  return (
+        <Card  sx={{ maxWidth: 300 }}  >
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              height="300"
+              image='https://clients.ogoodigital.com/frontend-landing/assets/images/hero/hero.png'
+              alt="green iguana"
+            />
+            <CardContent >
+              <Typography gutterBottom variant="h4" align="center"  component="div">
+              {title}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
     )
 }
 

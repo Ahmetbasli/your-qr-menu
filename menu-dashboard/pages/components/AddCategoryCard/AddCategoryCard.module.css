@@ -1,0 +1,9 @@
+.card{
+    background: none;
+    border: 2px dashed black;
+    z-index: 100px;
+    
+}
+.card:hover{
+   /* background: red; */
+}
