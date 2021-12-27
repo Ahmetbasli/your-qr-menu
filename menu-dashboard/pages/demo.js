@@ -1,12 +1,13 @@
 import * as React from 'react';
 
 // components
-import CategoryCard from './components/CategoryCard/CategoryCard'
+import CategoryFeed from './components/CategoryFeed/CategoryFeed'
 
-const Demo = () => {
+const Demo = ({ data: categories }) => {
+    console.log(categories);
     return (
         < >
-            <CategoryCard/> 
+            <CategoryFeed categories={categories}/> 
         </>
     )
 }
