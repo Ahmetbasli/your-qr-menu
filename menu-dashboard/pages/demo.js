@@ -7,7 +7,7 @@ import Title from './components/Title/Title'
 //styles
 import styles from '../styles/Demo.module.css'
 
-const Demo = ({ data: categories }) => {
+const Demo = ({ data: categories=null }) => {
     return (
         <main className={styles.main}>
           <Header/>
@@ -17,7 +17,7 @@ const Demo = ({ data: categories }) => {
     )
 }
 
-export default Demo
+
 
 export async function getStaticProps() {
   const res = await fetch(`https://your-qr-menu-backend.herokuapp.com/category/all`);
