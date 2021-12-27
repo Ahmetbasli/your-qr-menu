@@ -10,9 +10,10 @@ import styles from '../styles/Demo.module.css'
 const Demo = ({ data: categories={} }) => {
     return (
         <main className={styles.main}>
-          <Header/>
+          hello
+          {/* <Header/>
           <Title/>
-          <CategoryFeed categories={categories}/> 
+          <CategoryFeed categories={categories}/>  */}
         </main>
     )
 }
