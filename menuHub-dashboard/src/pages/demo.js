@@ -1,5 +1,7 @@
 import * as React from "react";
-
+//redux
+import { addMultipleToCategories } from "../slices/categorySlice";
+import { useDispatch } from "react-redux";
 // components
 import CategoryFeed from "../components/CategoryFeed/CategoryFeed";
 import Header from "../components/Header/Header";
@@ -7,12 +9,15 @@ import Title from "../components/Title/Title";
 //styles
 import styles from "../styles/pages/Demo.module.css";
 
-const Demo = ({ data: categories = {} }) => {
+const Demo = ({ data: categories }) => {
+  const dispatch = useDispatch();
+  dispatch(addMultipleToCategories(categories));
+
   return (
     <main className={styles.main}>
       <Header />
       <Title />
-      <CategoryFeed categories={categories} />
+      <CategoryFeed />
     </main>
   );
 };

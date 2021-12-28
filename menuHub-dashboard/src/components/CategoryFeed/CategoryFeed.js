@@ -1,13 +1,18 @@
 import * as React from "react";
+//redux
+import { useSelector } from "react-redux";
+import { selectCategories } from "../../slices/categorySlice";
+//mui
 import { Grid } from "@mui/material";
 //styles
 import styles from "./CategoryFeed.module.css";
 // components
 import CategoryCard from "../CategoryCard/CategoryCard";
 import AddCategoryCard from "../AddCategoryCard/AddCategoryCard";
-console.log("typeof categories");
 
-const CategoryFeed = ({ categories }) => {
+const CategoryFeed = () => {
+  const categories = useSelector(selectCategories);
+
   console.log(categories);
   return (
     <div className={styles.productFeed}>

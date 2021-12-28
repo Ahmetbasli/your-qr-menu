@@ -32,18 +32,18 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
     });
   };
 
-  const postNewCategory = async () => {
-    //console.log(uploadedImg.name);
+  const AddNewCategory = async () => {
     const formData = new FormData();
     formData.append("categoryImage", uploadedImg);
     formData.append("title", categoryName.value);
     try {
-      await axios({
+      const response = await axios({
         method: "post",
         url: "https://your-qr-menu-backend.herokuapp.com/category/create",
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       });
+      console.log(response);
     } catch (err) {
       console.log(err);
     }
@@ -78,7 +78,7 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Vazgeç</Button>
-          <Button onClick={postNewCategory}>Kaydet</Button>
+          <Button onClick={AddNewCategory}>Kaydet</Button>
         </DialogActions>
       </Dialog>
     </div>
