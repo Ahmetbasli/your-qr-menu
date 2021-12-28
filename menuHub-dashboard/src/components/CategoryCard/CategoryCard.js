@@ -6,15 +6,18 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
-console.log("ahmet");
+const cardStyle = {
+  width: "80%",
+  minHeight: "45vw",
+};
 function CategoryCard({ title, categoryImage }) {
   return (
-    <Card sx={({ maxWidth: 300 }, { width: "80%" })}>
+    <Card style={cardStyle} sx={({ minHeight: "300px" }, { width: "80%" })}>
       <CardActionArea>
         {categoryImage && (
           <CardMedia
             component="img"
-            height="300"
+            height="500"
             image={`https://your-qr-menu-backend.herokuapp.com${categoryImage.slice(
               6
             )}`}

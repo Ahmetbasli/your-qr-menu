@@ -19,7 +19,7 @@ const Demo = ({ data: categories = {} }) => {
 
 export default Demo;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch(
     `https://your-qr-menu-backend.herokuapp.com/category/all`
   );
