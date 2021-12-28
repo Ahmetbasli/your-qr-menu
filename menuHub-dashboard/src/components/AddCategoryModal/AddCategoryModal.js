@@ -9,9 +9,12 @@ import Box from "@mui/material/Box";
 //components
 import UploadFolder from "../UploadFolder/UploadFolder";
 import styles from "./AddCategoryModal.module.css";
+//axios
+import axios from "axios";
 
 const AddCategoryModal = ({ openModal, setOpenModal }) => {
   const [categoryName, setCategoryName] = useState({ error: false });
+  const [uploadedImg, setUploadedImg] = useState({ error: true });
 
   const handleClose = () => {
     setOpenModal(false);
@@ -29,14 +32,36 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
     });
   };
 
-  const postNewCategory = () => {};
+  const postNewCategory = async () => {
+    //console.log(uploadedImg.name);
+    const formData = new FormData();
+    formData.append("categoryImage", uploadedImg);
+    formData.append("title", categoryName.value);
+    try {
+      await axios({
+        method: "post",
+        url: "https://your-qr-menu-backend.herokuapp.com/category/create",
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+    setOpenModal(false);
+  };
+
+  const senFileDataToAddCategoryModal = (uploadedFile) => {
+    setUploadedImg(uploadedFile);
+  };
 
   return (
     <div>
       <Dialog open={openModal} onClose={handleClose}>
         <DialogTitle>Yeni Kategori Ekle</DialogTitle>
         <DialogContent>
-          <UploadFolder />
+          <UploadFolder
+            senFileDataToAddCategoryModal={senFileDataToAddCategoryModal}
+          />
           <TextField
             autoFocus
             margin="dense"
@@ -53,7 +78,7 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Vazgeç</Button>
-          <Button onClick={handleClose}>Kaydet</Button>
+          <Button onClick={postNewCategory}>Kaydet</Button>
         </DialogActions>
       </Dialog>
     </div>

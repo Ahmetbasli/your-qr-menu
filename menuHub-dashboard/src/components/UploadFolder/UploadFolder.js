@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import ImageIcon from "@mui/icons-material/Image";
 import styles from "./UploadFolder.module.css";
 import { Typography } from "@mui/material";
-const UploadFolder = () => {
+const UploadFolder = ({ senFileDataToAddCategoryModal }) => {
   const [uploadedImg, setUploadedImg] = useState({ error: true });
 
   const handeOnFileChange = (e) => {
     setUploadedImg((prev) => {
       const file = e.target.files[0];
       const extention = file?.type.split("/")[1];
+
+      senFileDataToAddCategoryModal(file);
 
       if (extention === "jpeg" || extention === "png" || extention === "jpg") {
         return { error: false, file };
