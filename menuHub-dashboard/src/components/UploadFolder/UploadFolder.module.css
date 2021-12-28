@@ -23,3 +23,6 @@
 .input {
   @apply opacity-0;
 }
+.errorMessage {
+  color: red;
+}
