@@ -9,7 +9,6 @@ const UploadFolder = () => {
     setUploadedImg((prev) => {
       const file = e.target.files[0];
       const extention = file?.type.split("/")[1];
-      let hasError;
 
       if (extention === "jpeg" || extention === "png" || extention === "jpg") {
         return { error: false, file };
@@ -49,7 +48,7 @@ const UploadFolder = () => {
         uploadedImg.file.name
       ) : (
         <p className={styles.errorMessage}>
-          Yanlış bir dosya uzantısı girdiniz.
+          {uploadedImg.file && "Yanlış uzantısı bir dosya girdiniz."}
         </p>
       )}
     </>
