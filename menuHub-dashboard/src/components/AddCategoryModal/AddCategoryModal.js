@@ -50,8 +50,7 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
     try {
       const response = await axios({
         method: "post",
-        //  https://your-qr-menu-backend.herokuapp.com
-        url: "http://localhost:3001/category/create",
+        url: "https://menuhub-backend.herokuapp.com/category/create",
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       });
