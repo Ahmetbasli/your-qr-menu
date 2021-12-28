@@ -14,15 +14,13 @@ const UploadFolder = () => {
       >
         .jpg .png veya .jpeg Uzantılı dosyalar kabul edilir.
       </Typography>
-      <div className="flex items-center justify-center w-full">
-        <label className="flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 cursor-pointer hover:border-gray-300">
-          <div className="flex flex-col items-center justify-center pt-7">
+      <div className={styles.imageWrapper}>
+        <label className={styles.label}>
+          <div className={styles.smallWrapper}>
             <ImageIcon className={styles.icon} />
-            <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-              Bir fotograf seç
-            </p>
+            <p className={styles.paragraf}>Bir fotograf seç</p>
           </div>
-          <input type="file" className="opacity-0" />
+          <input type="file" className={styles.input} />
         </label>
       </div>
     </div>
