@@ -9,31 +9,29 @@ router.get("/all", async (req, res) => {
   res.send(allCategories);
 });
 
-router.post("/create", upload.single('categorytImage'),  async (req, res) => {
+router.post("/create", upload.single("categoryImage"), async (req, res) => {
   const data = {
-      title: req.body.title,
-      categorytImage: req.file?.path,
-      products: []
-  }
-  await CategoryService.add(data)
-  res.send('Got a create request at /user')
+    title: req.body.title,
+    categoryImage: req.file?.path,
+    products: [],
+  };
+  await CategoryService.add(data);
+  res.send("Got a create request at /user");
 });
-  
-router.put('/update/:id', async (req, res)=> {
-  const category = await CategoryService.find(req.params.id)
-  const data = req.body
-  CategoryService.update(category, data)
-  res.send('Got a update request at /user')
-})
 
+router.put("/update/:id", async (req, res) => {
+  const category = await CategoryService.find(req.params.id);
+  const data = req.body;
+  CategoryService.update(category, data);
+  res.send("Got a update request at /user");
+});
 
-router.delete('/delete/:id', async (req, res)=> {
-  const category = await CategoryService.find(req.params.id)
+router.delete("/delete/:id", async (req, res) => {
+  const category = await CategoryService.find(req.params.id);
 
   const { id } = req.params;
-  await CategoryService.del({ _id: id })
-  res.send('Got a DELETE request at /user')
-})
-
+  await CategoryService.del({ _id: id });
+  res.send("Got a DELETE request at /user");
+});
 
 module.exports = router;
