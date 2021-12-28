@@ -38,7 +38,7 @@ const AddCategoryCard = () => {
       <Card className={styles.card} sx={{ minWidth: 300, minHeight: 400 }}>
         <Fab
           onClick={handleClickOpen}
-          color="primary"
+          color="secondary"
           size="large"
           variant="extended"
           aria-label="add"

@@ -26,7 +26,8 @@ export default Demo;
 
 export async function getServerSideProps() {
   const res = await fetch(
-    `https://your-qr-menu-backend.herokuapp.com/category/all`
+    //  https://your-qr-menu-backend.herokuapp.com
+    `http://localhost:3001/category/all`
   );
   const data = await res.json();
 

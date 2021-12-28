@@ -15,15 +15,16 @@ router.post("/create", upload.single("categoryImage"), async (req, res) => {
     categoryImage: req.file?.path,
     products: [],
   };
-  await CategoryService.add(data);
-  res.send("Got a create request at /user");
+  const response = await CategoryService.add(data);
+  res.send(response);
 });
 
 router.put("/update/:id", async (req, res) => {
   const category = await CategoryService.find(req.params.id);
   const data = req.body;
   CategoryService.update(category, data);
-  res.send("Got a update request at /user");
+  //
+  res.send(data);
 });
 
 router.delete("/delete/:id", async (req, res) => {
@@ -31,7 +32,7 @@ router.delete("/delete/:id", async (req, res) => {
 
   const { id } = req.params;
   await CategoryService.del({ _id: id });
-  res.send("Got a DELETE request at /user");
+  res.send(category);
 });
 
 module.exports = router;
