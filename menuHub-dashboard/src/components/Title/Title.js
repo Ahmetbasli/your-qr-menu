@@ -1,18 +1,18 @@
-import React from 'react'
+import React from "react";
 
-//material ui 
-import { Typography } from '@mui/material'
+//material ui
+import { Typography } from "@mui/material";
 //styles
-import styles from './Title.module.css'
+import styles from "./Title.module.css";
 
-const Title = () => {
-    return (
-        <div className=''>
-            <Typography variant="h2" component="div" align="center" gutterBottom >
-                  Menu
-             </Typography>
-        </div>
-    )
-}
+const Title = ({ title }) => {
+  return (
+    <div className="">
+      <Typography variant="h2" component="div" align="center" gutterBottom>
+        {title || "Menu"}
+      </Typography>
+    </div>
+  );
+};
 
-export default Title
+export default Title;

@@ -38,6 +38,7 @@ const CategoryFeed = () => {
                 key={category._id}
               >
                 <Grid
+                  key={category._id}
                   item
                   xs={12}
                   md={6}
@@ -47,6 +48,7 @@ const CategoryFeed = () => {
                   justifyContent="center"
                 >
                   <CategoryCard
+                    key={category._id}
                     item
                     title={category.title}
                     categoryImage={category?.categoryImage}

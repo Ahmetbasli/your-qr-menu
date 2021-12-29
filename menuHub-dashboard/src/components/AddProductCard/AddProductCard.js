@@ -39,7 +39,7 @@ const AddProductCard = () => {
           aria-label="add"
         >
           <AddIcon sx={{ mr: 1 }} />
-          Yeni Kategori Ekle
+          Yeni Ürün Ekle
         </Fab>
       </Card>
       <AddCategoryModal openModal={openModal} setOpenModal={setOpenModal} />

@@ -2,13 +2,13 @@ import Head from "next/head";
 import styles from "../styles/pages/index.module.css";
 export default function Home({ data: products }) {
   return (
-    <div>
+    <>
       <Head>
         <title>Amazon 2.0</title>
       </Head>
 
       <main className={styles.main}>Home</main>
-    </div>
+    </>
   );
 }
 

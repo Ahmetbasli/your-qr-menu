@@ -66,7 +66,7 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
   };
 
   return (
-    <div>
+    <>
       <Dialog open={openModal} onClose={handleClose}>
         <DialogTitle>Yeni Kategori Ekle</DialogTitle>
         <DialogContent>
@@ -93,7 +93,7 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
           <Button onClick={AddNewCategory}>Kaydet</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 };
 
