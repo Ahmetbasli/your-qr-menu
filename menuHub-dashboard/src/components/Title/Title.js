@@ -9,7 +9,7 @@ const Title = ({ title }) => {
   return (
     <div className="">
       <Typography variant="h2" component="div" align="center" gutterBottom>
-        {title || "Menu"}
+        {title || "Menü"}
       </Typography>
     </div>
   );

@@ -1,32 +1,35 @@
 import * as React from "react";
 import { Grid } from "@mui/material";
 
-import CategoryCard from "../../components/CategoryCard/CategoryCard";
+import ProductCard from "../../components/ProductCard/ProductCard";
 import AddProductCard from "../../components/AddProductCard/AddProductCard";
 
 import styles from "./ProductFeed.module.css";
-const ProductFeed = ({ products }) => {
+const ProductFeed = ({ products, categoryIdOfProductFeed }) => {
   return (
     <div className={styles.productFeed}>
       <Grid container spacing={{ xs: 4 }}>
         <Grid
           item
           xs={12}
-          md={4}
+          md={6}
+          lg={4}
           container
           alignItems="center"
           justifyContent="center"
         >
-          <AddProductCard />
+          <AddProductCard categoryIdOfProductFeed={categoryIdOfProductFeed} />
         </Grid>
         {!!products &&
           products.map((product) => {
+            console.log(product);
             return (
               <Grid
                 key={product._id}
                 item
                 xs={12}
-                md={4}
+                md={6}
+                lg={4}
                 container
                 alignItems="center"
                 justifyContent="center"
@@ -35,6 +38,8 @@ const ProductFeed = ({ products }) => {
                   item
                   title={product.title}
                   productImage={product?.productImage}
+                  description={product.description}
+                  price={product.productPrice}
                 />
               </Grid>
             );

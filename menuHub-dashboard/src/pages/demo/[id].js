@@ -4,33 +4,35 @@ import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
 import { useRouter } from "next/router";
 import axios from "axios";
-
+import { selectCategories } from "../../slices/categorySlice";
+import { useSelector } from "react-redux";
 const Products = () => {
+  const categories = useSelector(selectCategories);
   const router = useRouter();
-  console.log(router.query);
   const categoryId = router.query;
-  console.log(categoryId.id);
   const [category, setCategory] = useState({});
-
   useEffect(() => {
+    if (Object.keys(categoryId).length === 0) return;
     try {
       (async () => {
         const res = await axios.get(
           `https://menuhub-backend.herokuapp.com/category/find/${categoryId.id}`
         );
-
         setCategory(res.data);
       })();
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [categoryId, categories]);
 
   return (
     <>
       <Header />
       <Title title={category.title} />
-      <ProductFeed />
+      <ProductFeed
+        categoryIdOfProductFeed={category._id}
+        products={category.products}
+      />
     </>
   );
 };

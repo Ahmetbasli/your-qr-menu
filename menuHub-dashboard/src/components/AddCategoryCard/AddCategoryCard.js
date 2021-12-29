@@ -17,9 +17,7 @@ const AddCategoryCard = () => {
   };
 
   const addNewCategory = async () => {
-    console.log("akfjsa");
     try {
-      console.log("staet to post");
       await axios.post(`${process.env.SERVICE_ORIGIN}/category/create`, {
         title: "Kebablar",
       });

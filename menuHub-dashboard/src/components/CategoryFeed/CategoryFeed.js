@@ -14,7 +14,6 @@ import Link from "next/link";
 const CategoryFeed = () => {
   const categories = useSelector(selectCategories);
 
-  console.log(categories);
   return (
     <div className={styles.productFeed}>
       <Grid container spacing={{ xs: 4 }}>

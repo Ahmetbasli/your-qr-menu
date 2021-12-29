@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 //redux
 import { addMultipleToCategories } from "../../slices/categorySlice";
 import { useDispatch } from "react-redux";
@@ -11,7 +11,9 @@ import styles from "../../styles/pages/Demo.module.css";
 
 const Demo = ({ data: categories }) => {
   const dispatch = useDispatch();
-  dispatch(addMultipleToCategories(categories));
+  useEffect(() => {
+    dispatch(addMultipleToCategories(categories));
+  }, []);
 
   return (
     <main className={styles.main}>

@@ -20,10 +20,10 @@ router.post(
 
     const category = await CategoryService.find({ _id: req.params.categoryId });
     await ProductService.addNewProductToaCategory(category, newProduct);
-    res.send(newProduct);
+    res.send(category);
   }
 );
-
+//
 router.put("/update/:id", async (req, res) => {
   const product = await ProductService.find(req.params.id);
   const data = req.body;

@@ -7,25 +7,13 @@ import styles from "./AddProductCard.module.css";
 //fetch
 import axios from "axios";
 //modal
-import AddCategoryModal from "../AddCategoryModal/AddCategoryModal";
+import AddProductModal from "../AddProductModal/AddProductModal";
 
-const AddProductCard = () => {
+const AddProductCard = ({ categoryIdOfProductFeed }) => {
   const [openModal, setOpenModal] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpenModal(true);
-  };
-
-  const addNewCategory = async () => {
-    console.log("akfjsa");
-    try {
-      console.log("staet to post");
-      await axios.post(`${process.env.SERVICE_ORIGIN}/category/create`, {
-        title: "Kebablar",
-      });
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (
@@ -42,7 +30,11 @@ const AddProductCard = () => {
           Yeni Ürün Ekle
         </Fab>
       </Card>
-      <AddCategoryModal openModal={openModal} setOpenModal={setOpenModal} />
+      <AddProductModal
+        openModal={openModal}
+        categoryIdOfProductFeed={categoryIdOfProductFeed}
+        setOpenModal={setOpenModal}
+      />
     </>
   );
 };

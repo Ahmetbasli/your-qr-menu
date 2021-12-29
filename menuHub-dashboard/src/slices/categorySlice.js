@@ -15,7 +15,7 @@ export const categorySlice = createSlice({
       state.categories = [...state.categories, action.payload];
     },
     addMultipleToCategories: (state, action) => {
-      state.categories = [...state.categories, ...action.payload];
+      state.categories = [...action.payload];
     },
     removeFromCategories: (state, action) => {
       state.categories = state.categories.filter(
