@@ -9,7 +9,8 @@ import styles from "./CategoryFeed.module.css";
 // components
 import CategoryCard from "../CategoryCard/CategoryCard";
 import AddCategoryCard from "../AddCategoryCard/AddCategoryCard";
-
+//routing
+import Link from "next/link";
 const CategoryFeed = () => {
   const categories = useSelector(selectCategories);
 
@@ -20,7 +21,8 @@ const CategoryFeed = () => {
         <Grid
           item
           xs={12}
-          md={4}
+          md={6}
+          lg={4}
           container
           alignItems="center"
           justifyContent="center"
@@ -30,21 +32,27 @@ const CategoryFeed = () => {
         {!!categories &&
           categories.map((category) => {
             return (
-              <Grid
+              <Link
+                href="/demo/[id]"
+                as={`/demo/${category._id}`}
                 key={category._id}
-                item
-                xs={12}
-                md={4}
-                container
-                alignItems="center"
-                justifyContent="center"
               >
-                <CategoryCard
+                <Grid
                   item
-                  title={category.title}
-                  categoryImage={category?.categoryImage}
-                />
-              </Grid>
+                  xs={12}
+                  md={6}
+                  lg={4}
+                  container
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <CategoryCard
+                    item
+                    title={category.title}
+                    categoryImage={category?.categoryImage}
+                  />
+                </Grid>
+              </Link>
             );
           })}
       </Grid>

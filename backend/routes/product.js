@@ -1,5 +1,5 @@
 const express = require("express");
-const { find } = require("../models/product");
+//const { find } = require("../models/product");
 const router = express.Router();
 const upload = require("../multer");
 const ProductService = require("../servers/product-service");
@@ -9,9 +9,10 @@ router.post(
   "/create/:categoryId",
   upload.single("productImage"),
   async (req, res) => {
+    console.log(req.body.title);
     const data = {
-      producttImage: req.file?.path,
       title: req.body.title,
+      productImage: req.file?.path,
       description: req.body.description,
       productPrice: req.body.price,
     };

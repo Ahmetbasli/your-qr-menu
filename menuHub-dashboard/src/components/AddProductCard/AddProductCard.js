@@ -3,13 +3,13 @@ import Card from "@mui/material/Card";
 import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
 //styles
-import styles from "./AddCategoryCard.module.css";
+import styles from "./AddProductCard.module.css";
 //fetch
 import axios from "axios";
 //modal
 import AddCategoryModal from "../AddCategoryModal/AddCategoryModal";
 
-const AddCategoryCard = () => {
+const AddProductCard = () => {
   const [openModal, setOpenModal] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -47,4 +47,4 @@ const AddCategoryCard = () => {
   );
 };
 
-export default AddCategoryCard;
+export default AddProductCard;

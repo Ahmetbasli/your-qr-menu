@@ -7,23 +7,20 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
 const cardStyle = {
-  width: "80%",
-  minHeight: "45vw",
+  //width: "80%",
+  //minHeight: "25vw",
 };
 function CategoryCard({ title, categoryImage }) {
   return (
-    <Card style={cardStyle} sx={({ minHeight: "300px" }, { width: "80%" })}>
+    <Card style={cardStyle} sx={({ minHeight: "200px" }, { width: "80%" })}>
       <CardActionArea>
-        {categoryImage && (
+        {/* {categoryImage && (
           <CardMedia
             component="img"
-            height="500"
-            image={`https://your-qr-menu-backend.herokuapp.com${categoryImage.slice(
-              6
-            )}`}
+            image={`${process.env.SERVICE_ORIGIN} ${categoryImage.slice(6)}`}
             alt="green iguana"
           />
-        )}
+        )} */}
         <CardContent>
           <Typography gutterBottom variant="h4" align="center" component="div">
             {title}
