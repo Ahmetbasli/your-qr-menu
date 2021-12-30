@@ -67,7 +67,7 @@ function CategoryCard({ title, categoryImage, id }) {
         )}
         <CardContent>
           <Typography gutterBottom variant="h5" align="center" component="div">
-            {categories.length}
+            {title}
           </Typography>
         </CardContent>
       </CardActionArea>
