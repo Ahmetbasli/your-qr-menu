@@ -5,22 +5,33 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+console.log(process.env.SERVICE_ORIGIN);
 
 const cardStyle = {
-  //width: "80%",
-  //minHeight: "25vw",
+  // backgroundColor: "#CBC3E3",
+  card: {
+    height: "300px",
+    width: "300px",
+  },
+  img: {
+    marginBottom: "13px",
+    height: "200px",
+    objectFit: "cover",
+  },
 };
 function CategoryCard({ title, categoryImage }) {
+  console.log(categoryImage);
   return (
-    <Card style={cardStyle} sx={({ minHeight: "200px" }, { width: "80%" })}>
+    <Card style={cardStyle.card}>
       <CardActionArea>
-        {/* {categoryImage && (
+        {categoryImage && (
           <CardMedia
+            style={cardStyle.img}
             component="img"
-            image={`${process.env.SERVICE_ORIGIN} ${categoryImage.slice(6)}`}
+            image={`https://menuhub-backend.herokuapp.com/upload/${categoryImage}`}
             alt="green iguana"
           />
-        )} */}
+        )}
         <CardContent>
           <Typography gutterBottom variant="h4" align="center" component="div">
             {title}

@@ -70,9 +70,7 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
       <Dialog open={openModal} onClose={handleClose}>
         <DialogTitle>Yeni Kategori Ekle</DialogTitle>
         <DialogContent>
-          <UploadFolder
-            senFileDataToAddCategoryModal={senFileDataToAddCategoryModal}
-          />
+          <UploadFolder sendFileData={senFileDataToAddCategoryModal} />
           <TextField
             autoFocus
             margin="dense"

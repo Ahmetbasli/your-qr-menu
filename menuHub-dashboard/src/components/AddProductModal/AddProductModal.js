@@ -75,7 +75,7 @@ const AddProductModal = ({
   const sendFileDataToAddProductModal = (uploadedFile) => {
     setUploadedImg(uploadedFile);
   };
-
+  const sendFileData = "ahmet";
   return (
     <>
       <Dialog open={openModal} onClose={handleClose}>
