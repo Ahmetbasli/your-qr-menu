@@ -55,9 +55,7 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
         headers: { "Content-Type": "multipart/form-data" },
       });
       dispatch(addToCategories(response.data));
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
     setOpenModal(false);
   };
 

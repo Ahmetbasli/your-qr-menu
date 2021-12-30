@@ -16,16 +16,6 @@ const AddCategoryCard = () => {
     setOpenModal(true);
   };
 
-  const addNewCategory = async () => {
-    try {
-      await axios.post(`${process.env.SERVICE_ORIGIN}/category/create`, {
-        title: "Kebablar",
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <>
       <Card className={styles.card} sx={{ minWidth: 300, minHeight: 400 }}>

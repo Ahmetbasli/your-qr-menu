@@ -49,7 +49,6 @@ const AddProductModal = ({
   };
 
   const AddProductToCurrentCategory = async () => {
-    console.log(productPrice);
     const formData = new FormData();
     formData.append("productImage", uploadedImg);
     formData.append("title", productTitle);
@@ -63,12 +62,9 @@ const AddProductModal = ({
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       });
-      console.log(formData);
       dispatch(removeFromCategories({ id: categoryIdOfProductFeed }));
       dispatch(addToCategories(response.data));
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
     setOpenModal(false);
   };
 

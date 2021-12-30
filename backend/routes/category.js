@@ -16,7 +16,7 @@ router.get("/all", async (req, res) => {
 router.post("/create", upload.single("categoryImage"), async (req, res) => {
   const data = {
     title: req.body.title,
-    categoryImage: req.file.filename,
+    categoryImage: req.file?.filename,
     products: [],
   };
   const response = await CategoryService.add(data);

@@ -11,7 +11,7 @@ router.post(
   async (req, res) => {
     const data = {
       title: req.body.title,
-      productImage: req.file.filename,
+      productImage: req.file?.filename,
       description: req.body.description,
       productPrice: req.body.price,
     };

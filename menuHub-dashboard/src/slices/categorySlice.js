@@ -19,7 +19,7 @@ export const categorySlice = createSlice({
     },
     removeFromCategories: (state, action) => {
       state.categories = state.categories.filter(
-        (item) => item.id !== action.payload.id
+        (item) => item._id !== action.payload
       );
     },
   },

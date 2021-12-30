@@ -31,29 +31,27 @@ const CategoryFeed = () => {
         {!!categories &&
           categories.map((category) => {
             return (
-              <Link
-                href="/demo/[id]"
-                as={`/demo/${category._id}`}
+              <Grid
                 key={category._id}
+                item
+                xs={12}
+                md={6}
+                lg={4}
+                container
+                alignItems="center"
+                justifyContent="center"
               >
-                <Grid
-                  key={category._id}
-                  item
-                  xs={12}
-                  md={6}
-                  lg={4}
-                  container
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <CategoryCard
-                    key={category._id}
-                    item
-                    title={category.title}
-                    categoryImage={category?.categoryImage}
-                  />
-                </Grid>
-              </Link>
+                <Link passHref href="/demo/[id]" as={`/demo/${category._id}`}>
+                  <div key={category._id}>
+                    <CategoryCard
+                      id={category._id}
+                      item
+                      title={category.title}
+                      categoryImage={category?.categoryImage}
+                    />
+                  </div>
+                </Link>
+              </Grid>
             );
           })}
       </Grid>

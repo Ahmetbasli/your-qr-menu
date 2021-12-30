@@ -22,7 +22,6 @@ const ProductFeed = ({ products, categoryIdOfProductFeed }) => {
         </Grid>
         {!!products &&
           products.map((product) => {
-            console.log(product);
             return (
               <Grid
                 key={product._id}
