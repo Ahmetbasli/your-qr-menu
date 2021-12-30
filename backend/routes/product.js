@@ -9,10 +9,9 @@ router.post(
   "/create/:categoryId",
   upload.single("productImage"),
   async (req, res) => {
-    console.log(req.body.title);
     const data = {
       title: req.body.title,
-      productImage: req.file?.path,
+      productImage: req.file.filename,
       description: req.body.description,
       productPrice: req.body.price,
     };

@@ -1,34 +1,34 @@
-let fs = require('fs-extra');
-const multer = require('multer');
+let fs = require("fs-extra");
+const multer = require("multer");
+const crypto = require("crypto");
+const { GridFsStorage } = require("multer-gridfs-storage");
+const path = require("path");
+const mongoose = require("mongoose");
 
-const storage = multer.diskStorage({
-    destination: (req, file, callback) => {
-        const path = `./public/uploads/`;
-        fs.mkdirsSync(path);
-        callback(null, path);
-      },
-      filename: (req, file, callback) => {
-        //originalname is the uploaded file's name with extn
-        callback(null,`${new Date().toISOString().replace(/:/g, '-')}-${file.originalname}` );
-      }
-        
+const url =
+  process.env.MONGODB_CONNECTION_STRING ||
+  "mongodb://localhost/perfAnalytics-1";
+// Create a storage object with a given configuration
+const storage = new GridFsStorage({
+  url: url,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename = buf.toString("hex") + path.extname(file.originalname);
+        const fileInfo = {
+          filename: filename,
+          bucketName: "uploads",
+        };
+        resolve(fileInfo);
+      });
+    });
+  },
 });
 
-const fileFilter = (req, file, cb) => {
-  // reject a file
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
-const upload = multer({
-    storage: storage,
-    limits: {
-      fileSize: 1024 * 1024 * 5
-    },
-    fileFilter: fileFilter 
-});
+// Set multer storage engine to the newly created object
+const upload = multer({ storage });
 
 module.exports = upload;
