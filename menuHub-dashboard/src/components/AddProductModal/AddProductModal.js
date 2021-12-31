@@ -1,10 +1,7 @@
 import React, { useState, useRef } from "react";
 //redux
 import { useDispatch } from "react-redux";
-import {
-  addToCategories,
-  removeFromCategories,
-} from "../../slices/categorySlice";
+import { addMultipleToCategories } from "../../slices/categorySlice";
 //mui
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -49,6 +46,7 @@ const AddProductModal = ({
   };
 
   const AddProductToCurrentCategory = async () => {
+    setOpenModal(false);
     const formData = new FormData();
     formData.append("productImage", uploadedImg);
     formData.append("title", productTitle);
@@ -62,10 +60,11 @@ const AddProductModal = ({
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       });
-      dispatch(removeFromCategories({ id: categoryIdOfProductFeed }));
-      dispatch(addToCategories(response.data));
+      const resOfCategories = await axios.get(
+        `https://menuhub-backend.herokuapp.com/category/all`
+      );
+      dispatch(addMultipleToCategories(resOfCategories.data));
     } catch (err) {}
-    setOpenModal(false);
   };
 
   const sendFileDataToAddProductModal = (uploadedFile) => {

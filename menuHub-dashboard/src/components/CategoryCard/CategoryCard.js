@@ -15,14 +15,14 @@ import { selectCategories } from "../../slices/categorySlice";
 import { useSelector } from "react-redux";
 const cardStyle = {
   // backgroundColor: "#CBC3E3",
-  card: {
-    //height: "330px",
-    width: "300px",
-  },
-  img: {
-    height: "200px",
-    objectFit: "cover",
-  },
+  // card: {
+  //   height: "230px",
+  //   width: "180px",
+  // },
+  // img: {
+  //   height: "100px",
+  //   objectFit: "cover",
+  // },
   options: {
     justifyContent: "center",
   },
@@ -30,13 +30,10 @@ const cardStyle = {
 function CategoryCard({ title, categoryImage, id }) {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
-  console.log(categories);
   //to resfreh component
-  useEffect(() => {}, [categories]);
 
   const removeCardOnDeleteClicked = (event) => {
     const deleteCategoryFromDatabase = async () => {
-      console.log(id);
       try {
         const res = await axios.delete(
           `https://menuhub-backend.herokuapp.com/category/delete/${id}`

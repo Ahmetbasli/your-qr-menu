@@ -18,7 +18,7 @@ const AddCategoryCard = () => {
 
   return (
     <>
-      <Card className={styles.card} sx={{ minWidth: 300, minHeight: 400 }}>
+      <Card className={styles.card} sx={{ minWidth: 300, minHeight: 100 }}>
         <Fab
           onClick={handleClickOpen}
           color="secondary"

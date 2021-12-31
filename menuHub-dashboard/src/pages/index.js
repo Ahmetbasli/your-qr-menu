@@ -4,7 +4,7 @@ export default function Home({ data: products }) {
   return (
     <>
       <Head>
-        <title>Amazon 2.0</title>
+        <title>Menu Hub</title>
       </Head>
 
       <main className={styles.main}>Home</main>

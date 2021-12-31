@@ -21,7 +21,6 @@ const Products = () => {
         setCategory(res.data);
       })();
     } catch (err) {
-      console.log(err);
     }
   }, [categoryId, categories]);
 

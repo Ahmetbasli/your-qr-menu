@@ -13,7 +13,7 @@ import AddCategoryCard from "../AddCategoryCard/AddCategoryCard";
 import Link from "next/link";
 const CategoryFeed = () => {
   const categories = useSelector(selectCategories);
-
+  console.log();
   return (
     <div className={styles.productFeed}>
       <Grid container spacing={{ xs: 4 }}>
@@ -28,13 +28,13 @@ const CategoryFeed = () => {
         >
           <AddCategoryCard />
         </Grid>
-        {!!categories &&
+        {categories &&
           categories.map((category) => {
             return (
               <Grid
                 key={category._id}
                 item
-                xs={12}
+                xs={6}
                 md={6}
                 lg={4}
                 container
@@ -42,7 +42,7 @@ const CategoryFeed = () => {
                 justifyContent="center"
               >
                 <Link passHref href="/demo/[id]" as={`/demo/${category._id}`}>
-                  <div key={category._id}>
+                  <div>
                     <CategoryCard
                       id={category._id}
                       item

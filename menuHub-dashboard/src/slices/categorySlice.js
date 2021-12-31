@@ -22,6 +22,21 @@ export const categorySlice = createSlice({
         (item) => item._id !== action.payload
       );
     },
+    removeOneProductFromCurrentCategory: (state, action) => {
+      const currentCategory = state.categories.find(
+        (category) => category._id === action.payload.categoryIdOfProductFeed
+      );
+
+      const filteredProducts = currentCategory.products.filter(
+        (item) => item._id !== action.payload.id
+      );
+      currentCategory.products = filteredProducts;
+
+      console.log(currentCategory);
+      state.categories = state.categories
+        .filter((item) => item._id !== action.payload.categoryIdOfProductFeed)
+        .push(currentCategory);
+    },
   },
 });
 
@@ -29,6 +44,7 @@ export const {
   addToCategories,
   removeFromCategories,
   addMultipleToCategories,
+  removeOneProductFromCurrentCategory,
 } = categorySlice.actions;
 
 // Selectors -  This is how to pull information from the Global store slice

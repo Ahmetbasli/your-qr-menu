@@ -1,6 +1,8 @@
-.header{
-    height: 50px;
-    background: purple;
-    color: whitesmoke;
-    text-align: center;
+.header {
+  margin-top: 10px;
+  background: purple;
+  color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

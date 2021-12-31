@@ -40,6 +40,7 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
   };
 
   const AddNewCategory = async () => {
+    setOpenModal(false);
     if (!titleRef.current.value) {
       setCategoryName((prev) => ({ ...prev, error: true }));
       return;
@@ -56,7 +57,6 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
       });
       dispatch(addToCategories(response.data));
     } catch (err) {}
-    setOpenModal(false);
   };
 
   const senFileDataToAddCategoryModal = (uploadedFile) => {

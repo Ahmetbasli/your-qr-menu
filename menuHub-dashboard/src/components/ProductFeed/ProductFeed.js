@@ -34,7 +34,9 @@ const ProductFeed = ({ products, categoryIdOfProductFeed }) => {
                 justifyContent="center"
               >
                 <ProductCard
+                  id={product._id}
                   item
+                  categoryIdOfProductFeed={categoryIdOfProductFeed}
                   title={product.title}
                   productImage={product?.productImage}
                   description={product.description}
