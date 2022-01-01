@@ -13,7 +13,6 @@ import AddCategoryCard from "../AddCategoryCard/AddCategoryCard";
 import Link from "next/link";
 const CategoryFeed = () => {
   const categories = useSelector(selectCategories);
-  console.log();
   return (
     <div className={styles.productFeed}>
       <Grid container spacing={{ xs: 4 }}>

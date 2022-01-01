@@ -46,7 +46,6 @@ const AddProductModal = ({
   };
   const AddProductToCurrentCategory = async () => {
     setOpenModal(false);
-    console.log(productTitle);
     const formData = new FormData();
     formData.append("productImage", uploadedImg);
     formData.append("title", productTitle.value);

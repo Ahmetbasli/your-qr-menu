@@ -32,7 +32,6 @@ export const categorySlice = createSlice({
       );
       currentCategory.products = filteredProducts;
 
-      console.log(currentCategory);
       state.categories = state.categories
         .filter((item) => item._id !== action.payload.categoryIdOfProductFeed)
         .push(currentCategory);
