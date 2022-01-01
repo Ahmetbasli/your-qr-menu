@@ -91,10 +91,15 @@ const EditCategoryModal = ({ openModal, setOpenModal, id }) => {
   const updateCurrentCategory = async () => {
     if (categoryTitle.error || uploadedImg?.error) return;
 
+    if (currentCategory.categoryImageOriginalName === uploadedImg?.value.name) {
+      setOpenModal(false);
+      return;
+    }
+
     setIsCurrentCategoryUpdating(true);
 
     const formData = new FormData();
-    if (!uploadedImg) {
+    if (uploadedImg === null) {
       // if user remove img
       formData.append("categoryImage", uploadedImg);
     } else if (uploadedImg.value.size) {
