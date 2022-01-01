@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //redux
 import { useDispatch } from "react-redux";
 //mui
@@ -10,10 +10,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
-import { selectCategories } from "../../slices/categorySlice";
 //components
 import UploadFolder from "../UploadFolder/UploadFolder";
-import styles from "./EditCategoryModal.module.css";
 //axios
 import axios from "axios";
 import IconButton from "@mui/material/IconButton";
@@ -31,35 +29,62 @@ const modalStyles = {
     height: "25px",
     color: "#d32f2f",
   },
+  uploadMessage: {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    margin: "auto 0",
+
+    height: "25px",
+  },
 };
 
-const EditCategoryModal = ({ openModal, setOpenModal, id }) => {
+const EditProductModal = ({ openModal, setOpenModal, id }) => {
   const dispatch = useDispatch();
-  const categories = useSelector(selectCategories);
-  const currentCategory = categories.find((category) => category._id === id);
-  const [isCurrentCategoryUpdating, setIsCurrentCategoryUpdating] =
+  const [isCurrentProductUpdating, setIsCurrentProductUpdating] =
     useState(false);
-  const [categoryTitle, setCategoryTitle] = useState({
-    value: currentCategory.title,
-    error: false,
-  });
-  const [uploadedImg, setUploadedImg] = useState({
-    value: {
-      name: currentCategory.categoryImageOriginalName,
-    },
-    error: false,
-    errorMessage: "",
-  });
+  const [currentPorduct, setCurrentProduct] = useState(null);
+  const [productTitle, setProductTitle] = useState(null);
+  const [uploadedImg, setUploadedImg] = useState(null);
+  const [productDescription, setProductDescription] = useState(null);
+  const [productPrice, setProductPrice] = useState(null);
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get(
+          `https://menuhub-backend.herokuapp.com/product/${id}`
+        );
+        const resOfCurrentProduct = res.data;
+        setCurrentProduct(resOfCurrentProduct);
+        setProductTitle({
+          value: resOfCurrentProduct.title,
+          error: false,
+        });
+
+        setUploadedImg({
+          value: {
+            name: resOfCurrentProduct.productImageOriginalName,
+          },
+          error: false,
+          errorMessage: "",
+        });
+
+        setProductDescription(resOfCurrentProduct.productDescription);
+
+        setProductPrice(resOfCurrentProduct.productPrice);
+      } catch (err) {}
+    })();
+  }, []);
+
   const handleClose = () => {
     setOpenModal(false);
 
-    setCategoryTitle({
-      value: currentCategory.title,
+    setProductTitle({
+      value: currentPorduct.title,
       error: false,
     });
     setUploadedImg({
       value: {
-        name: currentCategory.categoryImageOriginalName,
+        name: currentPorduct.categoryImageOriginalName,
       },
       error: false,
       errorMessage: "",
@@ -67,7 +92,7 @@ const EditCategoryModal = ({ openModal, setOpenModal, id }) => {
   };
 
   const handleTextFieldChange = (e) => {
-    setCategoryTitle(() => {
+    setProductTitle(() => {
       const value = e.target.value;
 
       if (value === "") {
@@ -87,29 +112,24 @@ const EditCategoryModal = ({ openModal, setOpenModal, id }) => {
   const sendFileData = (uploadedFile) => {
     setUploadedImg(uploadedFile);
   };
+  const updateCurrentProduct = async () => {
+    if (productTitle.error || uploadedImg?.error) return;
 
-  const updateCurrentCategory = async () => {
-    if (categoryTitle.error || uploadedImg?.error) return;
-
-    // if (currentCategory.categoryImageOriginalName === uploadedImg?.value.name) {
-    //   setOpenModal(false);
-    //   return;
-    // }
-
-    setIsCurrentCategoryUpdating(true);
+    setIsCurrentProductUpdating(true);
 
     const formData = new FormData();
     if (uploadedImg === null) {
-      // if user remove img
-      formData.append("categoryImage", null);
+      // if user delete img
+      formData.append("productImage", null);
     } else if (uploadedImg.value.size) {
-      formData.append("categoryImage", uploadedImg.value);
+      formData.append("productImage", uploadedImg.value);
     }
-
-    formData.append("title", categoryTitle.value);
+    formData.append("title", productTitle.value);
+    formData.append("description", productDescription);
+    formData.append("price", productPrice);
 
     try {
-      const postUrl = `https://menuhub-backend.herokuapp.com/category/update/${id}`;
+      const postUrl = `https://menuhub-backend.herokuapp.com/product/update/${id}`;
       const response = await axios({
         method: "put",
         url: postUrl,
@@ -120,15 +140,14 @@ const EditCategoryModal = ({ openModal, setOpenModal, id }) => {
         `https://menuhub-backend.herokuapp.com/category/all`
       );
       dispatch(addMultipleToCategories(resOfCategories.data));
-      setIsCurrentCategoryUpdating(false);
       setOpenModal(false);
+      setIsCurrentProductUpdating(false);
     } catch (err) {}
   };
 
   const removeImageOnDeleteClicked = () => {
     setUploadedImg(null);
   };
-
   return (
     <>
       <Dialog open={openModal} onClose={handleClose}>
@@ -141,11 +160,8 @@ const EditCategoryModal = ({ openModal, setOpenModal, id }) => {
               variant="p"
               align="left"
               style={{
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                margin: "auto 0",
+                ...modalStyles.uploadMessage,
                 color: !uploadedImg?.error ? "green" : "#d32f2f",
-                height: "25px",
               }}
               component="div"
             >
@@ -165,7 +181,7 @@ const EditCategoryModal = ({ openModal, setOpenModal, id }) => {
             )}
           </div>
           <TextField
-            error={categoryTitle.error ? true : false}
+            error={productTitle?.error ? true : false}
             autoFocus
             margin="dense"
             id="title"
@@ -173,16 +189,38 @@ const EditCategoryModal = ({ openModal, setOpenModal, id }) => {
             type="title"
             fullWidth
             variant="outlined"
-            value={categoryTitle.value}
-            helperText={categoryTitle.error ? categoryTitle.errorMessage : ""}
+            value={productTitle?.value}
+            helperText={productTitle?.error ? productTitle?.errorMessage : ""}
             onChange={(e) => handleTextFieldChange(e)}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="description"
+            label="Ürün açıklaması"
+            type="text"
+            fullWidth
+            variant="outlined"
+            multiline
+            rows={3}
+            onChange={(e) => setProductDescription(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="price"
+            label="Fiyat"
+            type="text"
+            fullWidth
+            variant="outlined"
+            onChange={(e) => setProductPrice(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Vazgeç</Button>
           <Button
-            disabled={isCurrentCategoryUpdating}
-            onClick={updateCurrentCategory}
+            disabled={isCurrentProductUpdating}
+            onClick={updateCurrentProduct}
           >
             Kaydet
           </Button>
@@ -192,4 +230,4 @@ const EditCategoryModal = ({ openModal, setOpenModal, id }) => {
   );
 };
 
-export default EditCategoryModal;
+export default EditProductModal;

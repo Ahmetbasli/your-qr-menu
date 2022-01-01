@@ -6,8 +6,15 @@ class CategoryService extends BaseService {
 
   async update(category, data) {
     category.title = data.title;
-    category.categoryImage = data.categoryImage || null;
-    category.categoryImageOriginalName = data.categoryImageOriginalName || null;
+    // id undefined do nothing
+    if (data.categoryImage === null) category.categoryImage = null;
+    if (data.categoryImage) category.categoryImage = data.categoryImage;
+
+    if (data.categoryImageOriginalName === null)
+      category.categoryImageOriginalName = null;
+    if (data.categoryImageOriginalName)
+      category.categoryImageOriginalName = data.categoryImageOriginalName;
+
     await category.save();
   }
 }

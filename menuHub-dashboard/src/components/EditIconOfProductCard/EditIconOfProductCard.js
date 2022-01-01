@@ -2,8 +2,8 @@ import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
-import EditCategoryModal from "../EditCategoryModal/EditCategoryModal";
-const EditIconofCategoryCard = ({ id }) => {
+import EditProductModal from "../EditProductModal/EditProductModal";
+const EditIconOfProductCard = ({ id, categoryIdOfProductFeed }) => {
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -14,7 +14,7 @@ const EditIconofCategoryCard = ({ id }) => {
       >
         <EditIcon />
       </IconButton>
-      <EditCategoryModal
+      <EditProductModal
         id={id}
         openModal={openModal}
         setOpenModal={setOpenModal}
@@ -23,4 +23,4 @@ const EditIconofCategoryCard = ({ id }) => {
   );
 };
 
-export default EditIconofCategoryCard;
+export default EditIconOfProductCard;

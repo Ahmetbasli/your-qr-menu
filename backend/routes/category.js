@@ -25,12 +25,13 @@ router.post("/create", upload.single("categoryImage"), async (req, res) => {
 });
 
 router.put("/update/:id", upload.single("categoryImage"), async (req, res) => {
-  console.log(req.file);
   const category = await CategoryService.find(req.params.id);
   const data = {
     title: req.body.title,
-    categoryImage: req.file?.filename,
-    categoryImageOriginalName: req.file?.originalname,
+    categoryImage:
+      req.body.categoryImage === "null" ? null : req.file?.filename,
+    categoryImageOriginalName:
+      req.body.categoryImage === "null" ? null : req.file?.originalname,
   };
 
   CategoryService.update(category, data);

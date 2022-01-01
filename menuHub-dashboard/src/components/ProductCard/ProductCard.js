@@ -14,6 +14,7 @@ import { addMultipleToCategories } from "../../slices/categorySlice";
 import { selectCategories } from "../../slices/categorySlice";
 import { useSelector } from "react-redux";
 import ShareableDeleteIconforCards from "../Common/ShareableDeleteIconforCards/ShareableDeleteIconforCards";
+import EditIconOfProductCard from "../EditIconOfProductCard/EditIconOfProductCard";
 const cardStyle = {
   // backgroundColor: "#CBC3E3",
   card: {
@@ -37,8 +38,7 @@ function ProductCard({
   categoryIdOfProductFeed,
 }) {
   const stopCardClickEventOnCardActionsArea = (event) => {
-    event.stopPropagation();
-    event.preventDefault();
+    // event.stopPropagation();
   };
 
   return (
@@ -66,11 +66,11 @@ function ProductCard({
       </CardActionArea>
       <CardActions
         style={cardStyle.options}
-        onMouseDown={(event) => event.stopPropagation()}
         onClick={(event) => stopCardClickEventOnCardActionsArea(event)}
         style={cardStyle.options}
       >
         <ShareableDeleteIconforCards id={id} />
+        <EditIconOfProductCard id={id} />
       </CardActions>
     </Card>
   );

@@ -141,7 +141,7 @@ const AddProductModal = ({
                 onClick={(event) => removeImageOnDeleteClicked(event)}
                 aria-label="remove Image On DeleteClicked"
               >
-                <DeleteIcon fontSize="small" />
+                <DeleteIcon fontSize="small" color="error" />
               </IconButton>
             )}
           </div>

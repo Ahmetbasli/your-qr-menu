@@ -8,8 +8,16 @@ class ProductService extends BaseService {
     product.title = data.title;
     product.description = data?.description || null;
     product.productPrice = data?.productPrice || null;
-    product.productImage = data?.productImage || null;
-    product.productImageOriginalName = data?.productImage || null;
+
+    // id undefined do nothing
+    if (data.productImage === null) product.productImage = null;
+    if (data.productImage) product.productImage = data.productImage;
+
+    if (data.productImageOriginalName === null)
+      product.productImageOriginalName = null;
+    if (data.productImageOriginalName)
+      product.productImageOriginalName = data.productImageOriginalName;
+
     await product.save();
   }
 
