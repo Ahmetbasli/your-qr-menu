@@ -44,12 +44,12 @@ const AddProductModal = ({
       }
     });
   };
-
   const AddProductToCurrentCategory = async () => {
     setOpenModal(false);
+    console.log(productTitle);
     const formData = new FormData();
     formData.append("productImage", uploadedImg);
-    formData.append("title", productTitle);
+    formData.append("title", productTitle.value);
     formData.append("description", productDescription);
     formData.append("price", productPrice);
     try {
@@ -85,7 +85,7 @@ const AddProductModal = ({
             type="text"
             fullWidth
             variant="outlined"
-            onChange={(e) => setProductTitle(e.target.value)}
+            onChange={(e) => handleTextFieldChange(e)}
           />
           <TextField
             autoFocus

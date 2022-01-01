@@ -1,23 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import ImageIcon from "@mui/icons-material/Image";
 import styles from "./UploadFolder.module.css";
 import { Typography } from "@mui/material";
 const UploadFolder = ({ sendFileData }) => {
-  const [uploadedImg, setUploadedImg] = useState({ error: true });
-
   const handeOnFileChange = (e) => {
-    setUploadedImg((prev) => {
-      const file = e.target.files[0];
-      const extention = file?.type.split("/")[1];
-
-      sendFileData(file);
-
-      if (extention === "jpeg" || extention === "png" || extention === "jpg") {
-        return { error: false, file };
-      } else {
-        return { error: true, file };
-      }
-    });
+    const file = e.target.files[0];
+    const extention = file?.type.split("/")[1];
+    if (!file) {
+      return;
+    } else if (
+      extention === "jpeg" ||
+      extention === "png" ||
+      extention === "jpg"
+    ) {
+      sendFileData({ value: file, error: false, errorMessage: " " });
+    } else {
+      sendFileData({
+        value: file,
+        error: true,
+        errorMessage: `.${extention} uzantılı dosyalar kabul edilmez. `,
+      });
+    }
   };
 
   return (
@@ -46,13 +49,6 @@ const UploadFolder = ({ sendFileData }) => {
           </label>
         </div>
       </div>
-      {!uploadedImg.error ? (
-        uploadedImg.file.name
-      ) : (
-        <p className={styles.errorMessage}>
-          {uploadedImg.file && "Yanlış uzantısı bir dosya girdiniz."}
-        </p>
-      )}
     </>
   );
 };

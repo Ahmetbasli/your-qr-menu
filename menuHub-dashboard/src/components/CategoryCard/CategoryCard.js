@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { removeFromCategories } from "../../slices/categorySlice";
 import { selectCategories } from "../../slices/categorySlice";
 import { useSelector } from "react-redux";
+import EditIconofCategoryCard from "../EditIconOfCategoryCard/EditIconOfCategoryCard";
 const cardStyle = {
   // backgroundColor: "#CBC3E3",
   // card: {
@@ -48,9 +49,7 @@ function CategoryCard({ title, categoryImage, id }) {
 
   const stopCardClickEventOnCardActionsArea = (event) => {
     event.stopPropagation();
-    event.preventDefault();
   };
-
   return (
     <Card style={cardStyle.card}>
       <CardActionArea>
@@ -69,7 +68,6 @@ function CategoryCard({ title, categoryImage, id }) {
         </CardContent>
       </CardActionArea>
       <CardActions
-        onMouseDown={(event) => event.stopPropagation()}
         onClick={(event) => stopCardClickEventOnCardActionsArea(event)}
         style={cardStyle.options}
       >
@@ -80,6 +78,7 @@ function CategoryCard({ title, categoryImage, id }) {
         >
           <DeleteIcon />
         </IconButton>
+        <EditIconofCategoryCard id={id} />
       </CardActions>
     </Card>
   );

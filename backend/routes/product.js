@@ -12,6 +12,7 @@ router.post(
     const data = {
       title: req.body.title,
       productImage: req.file?.filename,
+      productImageOriginalName: req.file?.originalname,
       description: req.body.description,
       productPrice: req.body.price,
     };
@@ -23,9 +24,15 @@ router.post(
   }
 );
 //
-router.put("/update/:id", async (req, res) => {
+router.put("/update/:id", upload.single("productImage"), async (req, res) => {
   const product = await ProductService.find(req.params.id);
-  const data = req.body;
+  const data = {
+    title: req.body.title,
+    productImage: req.file?.filename,
+    productImageOriginalName: req.file?.originalname,
+    description: req.body.description,
+    productPrice: req.body.price,
+  };
 
   ProductService.update(product, data);
   res.send(data);

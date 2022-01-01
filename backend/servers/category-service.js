@@ -5,12 +5,11 @@ class CategoryService extends BaseService {
   model = CategoryModel;
 
   async update(category, data) {
-      category.title = data.title
-      category.categoryImage = data.categoryImage || null
-      await category.save()
+    category.title = data.title;
+    category.categoryImage = data.categoryImage || null;
+    category.categoryImageOriginalName = data.categoryImageOriginalName || null;
+    await category.save();
   }
-
-
 }
 
 module.exports = new CategoryService();

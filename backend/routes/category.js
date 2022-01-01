@@ -17,15 +17,22 @@ router.post("/create", upload.single("categoryImage"), async (req, res) => {
   const data = {
     title: req.body.title,
     categoryImage: req.file?.filename,
+    categoryImageOriginalName: req.file?.originalname,
     products: [],
   };
   const response = await CategoryService.add(data);
   res.send(response);
 });
 
-router.put("/update/:id", async (req, res) => {
+router.put("/update/:id", upload.single("categoryImage"), async (req, res) => {
+  console.log(req.file);
   const category = await CategoryService.find(req.params.id);
-  const data = req.body;
+  const data = {
+    title: req.body.title,
+    categoryImage: req.file?.filename,
+    categoryImageOriginalName: req.file?.originalname,
+  };
+
   CategoryService.update(category, data);
   //
   res.send(data);
