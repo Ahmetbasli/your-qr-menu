@@ -19,7 +19,7 @@ import axios from "axios";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { addMultipleToCategories } from "../../slices/categorySlice";
-const modalSyles = {
+const modalStyles = {
   info: {
     display: "flex",
     alignItems: "center",
@@ -91,8 +91,6 @@ const EditCategoryModal = ({ openModal, setOpenModal, id }) => {
   const updateCurrentCategory = async () => {
     if (categoryTitle.error || uploadedImg?.error) return;
 
-    setOpenModal(false);
-
     setIsCurrentCategoryUpdating(true);
 
     const formData = new FormData();
@@ -132,7 +130,7 @@ const EditCategoryModal = ({ openModal, setOpenModal, id }) => {
         <DialogTitle>Kategoriyi Düzenle</DialogTitle>
         <DialogContent>
           <UploadFolder sendFileData={sendFileData} />
-          <div style={modalSyles.info}>
+          <div style={modalStyles.info}>
             <Typography
               gutterBottom
               variant="p"

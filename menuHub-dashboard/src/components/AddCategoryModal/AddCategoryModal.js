@@ -9,45 +9,73 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 //components
 import UploadFolder from "../UploadFolder/UploadFolder";
 import styles from "./AddCategoryModal.module.css";
 //axios
 import axios from "axios";
 
+const modalStyles = {
+  info: {
+    display: "flex",
+    alignItems: "center",
+    justifyContetn: "center",
+    fontSize: "15px",
+    paddingLeft: "14px",
+  },
+  textFieldErrMessage: {
+    height: "25px",
+    color: "#d32f2f",
+  },
+};
+
 const AddCategoryModal = ({ openModal, setOpenModal }) => {
   const dispatch = useDispatch();
-  const titleRef = useRef();
-  const [categoryName, setCategoryName] = useState({ error: false });
-  const [uploadedImg, setUploadedImg] = useState({ error: true });
+  const [isAddingNewCategory, setIsAddingNewCategory] = useState(false);
+  const [categoryTitle, setCategoryTitle] = useState(null);
+  const [uploadedImg, setUploadedImg] = useState(null);
 
   const handleClose = () => {
     setOpenModal(false);
-    setCategoryName((prev) => ({ ...prev, error: false }));
+    setCategoryTitle(null);
+    setUploadedImg(null);
   };
 
   const handleTextFieldChange = (e) => {
-    setCategoryName(() => {
+    setCategoryTitle(() => {
       const value = e.target.value;
 
       if (value === "") {
-        return { value, error: true };
+        return { value, error: true, errorMessage: "Bu alan boş bırakılamaz" };
+      } else if (value.length > 50) {
+        return {
+          value,
+          error: true,
+          errorMessage: "50 karakterden uzun kategori ismi girilemez",
+        };
       } else {
-        return { value, error: false };
+        return { value, error: false, errorMessage: " " };
       }
     });
   };
 
   const AddNewCategory = async () => {
-    setOpenModal(false);
-    if (!titleRef.current.value) {
-      setCategoryName((prev) => ({ ...prev, error: true }));
+    if (!categoryTitle) {
+      setCategoryTitle({
+        error: true,
+        errorMessage: "Bu alan boş bırakılamaz",
+      });
       return;
-    }
+    } else if (categoryTitle.error || uploadedImg?.error) return;
+
+    setIsAddingNewCategory(true);
+
     const formData = new FormData();
-    formData.append("categoryImage", uploadedImg);
-    formData.append("title", categoryName.value);
+    formData.append("categoryImage", uploadedImg?.value || null);
+    formData.append("title", categoryTitle.value);
     try {
       const response = await axios({
         method: "post",
@@ -56,11 +84,19 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
         headers: { "Content-Type": "multipart/form-data" },
       });
       dispatch(addToCategories(response.data));
+      setIsAddingNewCategory(false);
+      setOpenModal(false);
+      setCategoryTitle(null);
+      setUploadedImg(null);
     } catch (err) {}
   };
 
   const senFileDataToAddCategoryModal = (uploadedFile) => {
     setUploadedImg(uploadedFile);
+  };
+
+  const removeImageOnDeleteClicked = () => {
+    setUploadedImg(null);
   };
 
   return (
@@ -69,8 +105,37 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
         <DialogTitle>Yeni Kategori Ekle</DialogTitle>
         <DialogContent>
           <UploadFolder sendFileData={senFileDataToAddCategoryModal} />
+          <div style={modalStyles.info}>
+            <Typography
+              gutterBottom
+              variant="p"
+              align="left"
+              style={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                margin: "auto 0",
+                color: !uploadedImg?.error ? "green" : "#d32f2f",
+                height: "25px",
+              }}
+              component="div"
+            >
+              {!uploadedImg
+                ? ""
+                : !uploadedImg.error
+                ? uploadedImg.value.name?.substring(0, 30)
+                : uploadedImg.errorMessage}
+            </Typography>
+            {uploadedImg && (
+              <IconButton
+                onClick={(event) => removeImageOnDeleteClicked(event)}
+                aria-label="remove Image On DeleteClicked"
+              >
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            )}
+          </div>
           <TextField
-            autoFocus
+            error={categoryTitle?.error ? true : false}
             margin="dense"
             id="title"
             label="Categori İsmi (zorunlu Alan)"
@@ -78,15 +143,14 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
             fullWidth
             variant="outlined"
             onChange={(e) => handleTextFieldChange(e)}
-            inputRef={titleRef}
+            helperText={categoryTitle?.error ? categoryTitle.errorMessage : ""}
           />
-          <p className={styles.textFieldErrMessage}>
-            {categoryName.error ? "Bu alan boş bırakılamaz" : ""}
-          </p>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Vazgeç</Button>
-          <Button onClick={AddNewCategory}>Kaydet</Button>
+          <Button disabled={isAddingNewCategory} onClick={AddNewCategory}>
+            Kaydet
+          </Button>
         </DialogActions>
       </Dialog>
     </>
