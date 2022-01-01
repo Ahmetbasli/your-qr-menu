@@ -9,12 +9,28 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 //components
 import UploadFolder from "../UploadFolder/UploadFolder";
 import styles from "./AddProductModal.module.css";
 //axios
 import axios from "axios";
+
+const modalStyles = {
+  info: {
+    display: "flex",
+    alignItems: "center",
+    justifyContetn: "center",
+    fontSize: "15px",
+    paddingLeft: "14px",
+  },
+  textFieldErrMessage: {
+    height: "25px",
+    color: "#d32f2f",
+  },
+};
 
 const AddProductModal = ({
   openModal,
@@ -22,15 +38,18 @@ const AddProductModal = ({
   categoryIdOfProductFeed,
 }) => {
   const dispatch = useDispatch();
-
-  const [uploadedImg, setUploadedImg] = useState({ error: true });
-  const [productTitle, setProductTitle] = useState({ error: false });
-  const [productDescription, setProductDescription] = useState();
-  const [productPrice, setProductPrice] = useState();
+  const [isAddingNewProduct, setIsAddingNewProduct] = useState(false);
+  const [uploadedImg, setUploadedImg] = useState(null);
+  const [productTitle, setProductTitle] = useState(null);
+  const [productDescription, setProductDescription] = useState(null);
+  const [productPrice, setProductPrice] = useState(null);
 
   const handleClose = () => {
     setOpenModal(false);
-    setProductTitle((prev) => ({ ...prev, error: false }));
+    setProductTitle(null);
+    setUploadedImg(null);
+    setProductDescription(null);
+    setProductDescription(null);
   };
 
   const handleTextFieldChange = (e) => {
@@ -38,16 +57,32 @@ const AddProductModal = ({
       const value = e.target.value;
 
       if (value === "") {
-        return { value, error: true };
+        return { value, error: true, errorMessage: "Bu alan boş bırakılamaz" };
+      } else if (value.length > 50) {
+        return {
+          value,
+          error: true,
+          errorMessage: "50 karakterden uzun isim girilemez",
+        };
       } else {
-        return { value, error: false };
+        return { value, error: false, errorMessage: " " };
       }
     });
   };
   const AddProductToCurrentCategory = async () => {
-    setOpenModal(false);
+    if (!productTitle) {
+      setProductTitle({
+        error: true,
+        errorMessage: "Bu alan boş bırakılamaz",
+      });
+      return;
+    } else if (productTitle.error || uploadedImg?.error) return;
+
+    setIsAddingNewProduct(true);
+
+    // setOpenModal(false);
     const formData = new FormData();
-    formData.append("productImage", uploadedImg);
+    formData.append("productImage", uploadedImg?.value || null);
     formData.append("title", productTitle.value);
     formData.append("description", productDescription);
     formData.append("price", productPrice);
@@ -63,20 +98,55 @@ const AddProductModal = ({
         `https://menuhub-backend.herokuapp.com/category/all`
       );
       dispatch(addMultipleToCategories(resOfCategories.data));
+      setOpenModal(false);
+      setIsAddingNewProduct(false);
     } catch (err) {}
   };
 
   const sendFileDataToAddProductModal = (uploadedFile) => {
     setUploadedImg(uploadedFile);
   };
-  const sendFileData = "ahmet";
+  const removeImageOnDeleteClicked = () => {
+    setUploadedImg(null);
+  };
+
   return (
     <>
       <Dialog open={openModal} onClose={handleClose}>
         <DialogTitle>Yeni Ürün Ekle</DialogTitle>
         <DialogContent>
           <UploadFolder sendFileData={sendFileDataToAddProductModal} />
+          <div style={modalStyles.info}>
+            <Typography
+              gutterBottom
+              variant="p"
+              align="left"
+              style={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                margin: "auto 0",
+                color: !uploadedImg?.error ? "green" : "#d32f2f",
+                height: "25px",
+              }}
+              component="div"
+            >
+              {!uploadedImg
+                ? ""
+                : !uploadedImg.error
+                ? uploadedImg.value.name?.substring(0, 30)
+                : uploadedImg.errorMessage}
+            </Typography>
+            {uploadedImg && (
+              <IconButton
+                onClick={(event) => removeImageOnDeleteClicked(event)}
+                aria-label="remove Image On DeleteClicked"
+              >
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            )}
+          </div>
           <TextField
+            error={productTitle?.error ? true : false}
             autoFocus
             margin="dense"
             id="title"
@@ -85,6 +155,7 @@ const AddProductModal = ({
             fullWidth
             variant="outlined"
             onChange={(e) => handleTextFieldChange(e)}
+            helperText={productTitle?.error ? productTitle.errorMessage : ""}
           />
           <TextField
             autoFocus
@@ -108,13 +179,15 @@ const AddProductModal = ({
             variant="outlined"
             onChange={(e) => setProductPrice(e.target.value)}
           />
-          <p className={styles.textFieldErrMessage}>
-            {productTitle.error ? "Bu alan boş bırakılamaz" : ""}
-          </p>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Vazgeç</Button>
-          <Button onClick={AddProductToCurrentCategory}>Kaydet</Button>
+          <Button
+            disabled={isAddingNewProduct}
+            onClick={AddProductToCurrentCategory}
+          >
+            Kaydet
+          </Button>
         </DialogActions>
       </Dialog>
     </>

@@ -54,7 +54,7 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
         return {
           value,
           error: true,
-          errorMessage: "50 karakterden uzun kategori ismi girilemez",
+          errorMessage: "50 karakterden uzun ismi girilemez",
         };
       } else {
         return { value, error: false, errorMessage: " " };
@@ -84,14 +84,14 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
         headers: { "Content-Type": "multipart/form-data" },
       });
       dispatch(addToCategories(response.data));
-      setIsAddingNewCategory(false);
       setOpenModal(false);
+      setIsAddingNewCategory(false);
       setCategoryTitle(null);
       setUploadedImg(null);
     } catch (err) {}
   };
 
-  const senFileDataToAddCategoryModal = (uploadedFile) => {
+  const sendFileDataToAddCategoryModal = (uploadedFile) => {
     setUploadedImg(uploadedFile);
   };
 
@@ -104,7 +104,7 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
       <Dialog open={openModal} onClose={handleClose}>
         <DialogTitle>Yeni Kategori Ekle</DialogTitle>
         <DialogContent>
-          <UploadFolder sendFileData={senFileDataToAddCategoryModal} />
+          <UploadFolder sendFileData={sendFileDataToAddCategoryModal} />
           <div style={modalStyles.info}>
             <Typography
               gutterBottom
