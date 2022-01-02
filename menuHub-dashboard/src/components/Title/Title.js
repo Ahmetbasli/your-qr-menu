@@ -7,7 +7,7 @@ import styles from "./Title.module.css";
 
 const Title = ({ title }) => {
   return (
-    <div className="">
+    <div className={styles.title}>
       <Typography variant="h5" component="div" align="center" gutterBottom>
         {title || "Menü"}
       </Typography>
