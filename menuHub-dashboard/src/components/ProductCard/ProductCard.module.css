@@ -3,6 +3,7 @@
   transition: 0.3s;
   border-radius: 26px;
   width: 90vw;
+  cursor: pointer;
 }
 .imgContainer {
   height: 215px;

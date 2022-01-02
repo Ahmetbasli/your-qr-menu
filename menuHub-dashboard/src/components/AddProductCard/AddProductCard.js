@@ -26,7 +26,7 @@ const AddProductCard = ({ categoryIdOfProductFeed }) => {
           onClick={handleClickOpen}
           style={{
             background: "#f7906c",
-            color: "whitesmoke",
+            color: "black",
           }}
           color="secondary"
           size="large"

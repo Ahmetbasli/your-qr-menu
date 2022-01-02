@@ -202,6 +202,7 @@ const EditProductModal = ({ openModal, setOpenModal, id }) => {
             fullWidth
             variant="outlined"
             multiline
+            value={productDescription}
             rows={3}
             onChange={(e) => setProductDescription(e.target.value)}
           />
@@ -213,6 +214,7 @@ const EditProductModal = ({ openModal, setOpenModal, id }) => {
             type="text"
             fullWidth
             variant="outlined"
+            value={productPrice}
             onChange={(e) => setProductPrice(e.target.value)}
           />
         </DialogContent>

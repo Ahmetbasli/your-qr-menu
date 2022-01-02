@@ -44,12 +44,12 @@ function ProductCard({
           )}
           <div className={productImage ? styles.info : styles.infoNoImg}>
             <h3 className={styles.title}>{title}</h3>
-            {description !== "undefined" ? (
+            {description !== "undefined" && description !== "null" ? (
               <h4 className={styles.description}>{description}</h4>
             ) : (
-              " fsdf "
+              "  "
             )}
-            {price !== "undefined" ? (
+            {price !== "undefined" && price !== "null" ? (
               <h5 className={styles.price}>{price} ₺</h5>
             ) : (
               " "

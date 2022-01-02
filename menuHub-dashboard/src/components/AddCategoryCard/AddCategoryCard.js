@@ -25,7 +25,7 @@ const AddCategoryCard = () => {
       >
         <Fab
           onClick={handleClickOpen}
-          style={{ background: "#f7906c", color: "whitesmoke" }}
+          style={{ background: "#f7906c" }}
           size="large"
           variant="extended"
           aria-label="add"
