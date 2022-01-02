@@ -8,6 +8,7 @@
   position: relative;
 }
 .wrapper {
+  background: #f7906c;
   position: relative;
   display: flex;
   align-items: center;
