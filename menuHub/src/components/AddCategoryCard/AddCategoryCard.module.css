@@ -1,0 +1,11 @@
+.card {
+  background: none;
+  border: 2px dashed #f7906c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.card:hover {
+  /* background: red; */
+}
