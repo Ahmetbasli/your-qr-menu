@@ -15,13 +15,13 @@ const CategoryFeed = () => {
   const categories = useSelector(selectCategories);
   return (
     <div className={styles.productFeed}>
-      <Grid container spacing={{ xs: 4 }}>
+      <Grid container spacing={{ xs: 2 }}>
         <Grid
           item
           xs={12}
           md={6}
           lg={4}
-          container
+          style={{ width: "100%" }}
           alignItems="center"
           justifyContent="center"
         >
@@ -36,7 +36,6 @@ const CategoryFeed = () => {
                 xs={6}
                 md={6}
                 lg={4}
-                container
                 alignItems="center"
                 justifyContent="center"
               >

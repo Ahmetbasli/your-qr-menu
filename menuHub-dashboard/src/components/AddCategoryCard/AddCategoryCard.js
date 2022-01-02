@@ -18,10 +18,14 @@ const AddCategoryCard = () => {
 
   return (
     <>
-      <Card className={styles.card} sx={{ minWidth: 300, minHeight: 100 }}>
+      <Card
+        className={styles.card}
+        style={{ border: "1px dashed #f7906c" }}
+        sx={{ minWidth: 300, minHeight: 100 }}
+      >
         <Fab
           onClick={handleClickOpen}
-          color="secondary"
+          style={{ background: "#f7906c", color: "whitesmoke" }}
           size="large"
           variant="extended"
           aria-label="add"

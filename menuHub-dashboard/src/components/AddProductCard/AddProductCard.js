@@ -18,9 +18,16 @@ const AddProductCard = ({ categoryIdOfProductFeed }) => {
 
   return (
     <>
-      <Card className={styles.card} sx={{ minWidth: 300, minHeight: 400 }}>
+      <Card
+        className={styles.card}
+        sx={{ minWidth: 300, minHeight: 100, border: "1px dashed #f7906c" }}
+      >
         <Fab
           onClick={handleClickOpen}
+          style={{
+            background: "#f7906c",
+            color: "whitesmoke",
+          }}
           color="secondary"
           size="large"
           variant="extended"

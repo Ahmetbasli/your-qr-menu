@@ -12,7 +12,7 @@ const EditIconofCategoryCard = ({ id }) => {
         onClick={() => setOpenModal(true)}
         aria-label="add to favorites"
       >
-        <EditIcon />
+        <EditIcon style={{ fontSize: "18px" }} />
       </IconButton>
       <EditCategoryModal
         id={id}

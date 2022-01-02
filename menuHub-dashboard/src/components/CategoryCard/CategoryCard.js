@@ -14,20 +14,9 @@ import { removeFromCategories } from "../../slices/categorySlice";
 import { selectCategories } from "../../slices/categorySlice";
 import { useSelector } from "react-redux";
 import EditIconofCategoryCard from "../EditIconOfCategoryCard/EditIconOfCategoryCard";
-const cardStyle = {
-  // backgroundColor: "#CBC3E3",
-  // card: {
-  //   height: "230px",
-  //   width: "180px",
-  // },
-  // img: {
-  //   height: "100px",
-  //   objectFit: "cover",
-  // },
-  options: {
-    justifyContent: "center",
-  },
-};
+import Image from "next/image";
+import styles from "./CategoryCard.module.css";
+
 function CategoryCard({ title, categoryImage, id }) {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
@@ -51,36 +40,37 @@ function CategoryCard({ title, categoryImage, id }) {
     event.stopPropagation();
   };
   return (
-    <Card style={cardStyle.card}>
-      <CardActionArea>
+    <>
+      <div className={styles.card}>
         {categoryImage && (
-          <CardMedia
-            style={cardStyle.img}
-            component="img"
-            image={`https://menuhub-backend.herokuapp.com/upload/${categoryImage}`}
-            alt="green iguana"
-          />
+          <div className={styles.imgContainer}>
+            <Image
+              className={styles.img}
+              src={`https://menuhub-backend.herokuapp.com/upload/${categoryImage}`}
+              alt={title}
+              layout="fill"
+            />
+          </div>
         )}
-        <CardContent>
-          <Typography gutterBottom variant="h5" align="center" component="div">
-            {title}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+        <h3 className={categoryImage ? styles.title : styles.titleNoImg}>
+          {title}
+        </h3>
+      </div>
       <CardActions
+        className={styles.icons}
         onClick={(event) => stopCardClickEventOnCardActionsArea(event)}
-        style={cardStyle.options}
+        //style={cardStyle.options}
       >
         <IconButton
           onClick={(event) => removeCardOnDeleteClicked(event)}
           color="error"
           aria-label="add to favorites"
         >
-          <DeleteIcon />
+          <DeleteIcon className={styles.deleteIcon} />
         </IconButton>
         <EditIconofCategoryCard id={id} />
       </CardActions>
-    </Card>
+    </>
   );
 }
 

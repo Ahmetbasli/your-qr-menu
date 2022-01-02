@@ -17,7 +17,7 @@ const Header = () => {
         <Box sx={{ flexGrow: 1 }}>
           <AppBar
             position="static"
-            style={{ background: "purple", marginBottom: "10px" }}
+            style={{ background: "#f7906c", marginBottom: "10px" }}
           >
             <Typography
               className={styles.header}
