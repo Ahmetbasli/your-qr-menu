@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import CategoryFeed from "../../components/CategoryFeed/CategoryFeed";
 import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
+import Footer from "../../components/Footer/Footer";
 //styles
 import styles from "../../styles/pages/Demo.module.css";
 
@@ -20,6 +21,7 @@ const Demo = ({ data: categories }) => {
       <Header />
       <Title />
       <CategoryFeed />
+      <Footer />
     </main>
   );
 };

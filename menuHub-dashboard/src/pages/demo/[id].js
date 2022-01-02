@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { selectCategories } from "../../slices/categorySlice";
 import { useSelector } from "react-redux";
+import Footer from "../../components/Footer/Footer";
 const Products = () => {
   const categories = useSelector(selectCategories);
   const router = useRouter();
@@ -20,8 +21,7 @@ const Products = () => {
         );
         setCategory(res.data);
       })();
-    } catch (err) {
-    }
+    } catch (err) {}
   }, [categoryId, categories]);
 
   return (
@@ -32,6 +32,7 @@ const Products = () => {
         categoryIdOfProductFeed={category._id}
         products={category.products}
       />
+      <Footer />
     </>
   );
 };

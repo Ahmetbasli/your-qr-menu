@@ -4,6 +4,7 @@ import { addMultipleToCategories } from "../../slices/categorySlice";
 import { useDispatch } from "react-redux";
 // components
 import CategoryFeed from "../../components/CategoryFeed/CategoryFeed";
+import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
 //styles
@@ -20,6 +21,7 @@ const Demo = ({ data: categories }) => {
       <Header />
       <Title />
       <CategoryFeed />
+      <Footer />
     </main>
   );
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductFeed from "../../components/ProductFeed/ProductFeed";
 import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
+import Footer from "../../components/Footer/Footer";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { selectCategories } from "../../slices/categorySlice";
@@ -20,8 +21,7 @@ const Products = () => {
         );
         setCategory(res.data);
       })();
-    } catch (err) {
-    }
+    } catch (err) {}
   }, [categoryId, categories]);
 
   return (
@@ -32,6 +32,7 @@ const Products = () => {
         categoryIdOfProductFeed={category._id}
         products={category.products}
       />
+      <Footer />
     </>
   );
 };
