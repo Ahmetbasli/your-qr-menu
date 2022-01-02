@@ -86,6 +86,11 @@ const AddProductModal = ({
     formData.append("title", productTitle.value);
     formData.append("description", productDescription);
     formData.append("price", productPrice);
+    setUploadedImg(null);
+    setProductTitle(null);
+    setProductDescription(null);
+    setProductPrice(null);
+
     try {
       const postUrl = `https://menuhub-backend.herokuapp.com/product/create/${categoryIdOfProductFeed}`;
       const response = await axios({

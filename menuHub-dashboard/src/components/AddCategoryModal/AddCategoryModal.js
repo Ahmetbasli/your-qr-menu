@@ -76,6 +76,9 @@ const AddCategoryModal = ({ openModal, setOpenModal }) => {
     const formData = new FormData();
     formData.append("categoryImage", uploadedImg?.value || null);
     formData.append("title", categoryTitle.value);
+
+    setCategoryTitle(null);
+    setUploadedImg(null);
     try {
       const response = await axios({
         method: "post",
