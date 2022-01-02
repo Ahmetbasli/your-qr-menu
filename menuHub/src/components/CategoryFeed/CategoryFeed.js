@@ -8,7 +8,6 @@ import { Grid } from "@mui/material";
 import styles from "./CategoryFeed.module.css";
 // components
 import CategoryCard from "../CategoryCard/CategoryCard";
-import AddCategoryCard from "../AddCategoryCard/AddCategoryCard";
 //routing
 import Link from "next/link";
 const CategoryFeed = () => {
@@ -16,17 +15,6 @@ const CategoryFeed = () => {
   return (
     <div className={styles.productFeed}>
       <Grid container spacing={{ xs: 2 }}>
-        <Grid
-          item
-          xs={12}
-          md={6}
-          lg={4}
-          style={{ width: "100%" }}
-          alignItems="center"
-          justifyContent="center"
-        >
-          <AddCategoryCard />
-        </Grid>
         {categories &&
           categories.map((category) => {
             return (
