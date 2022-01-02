@@ -20,7 +20,11 @@ const Header = () => {
     <>
       {isLogin ? (
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar className={styles.header} position="static">
+          <AppBar
+            style={{ background: "#f7906c", backgroundColor: "#f7906c" }}
+            className={styles.header}
+            position="static"
+          >
             {!isInCategoryUrl && (
               <Link className={styles.headerLogo} href="/demo/">
                 <div className={styles.backtoMenu}>
