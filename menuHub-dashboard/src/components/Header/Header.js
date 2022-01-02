@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+
 //styles
 import styles from "./Header.module.css";
 //routing
@@ -24,7 +20,7 @@ const Header = () => {
     <>
       {isLogin ? (
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar className={styles.header} position="static">
+          <div className={styles.header} position="static">
             {!isInCategoryUrl && (
               <Link className={styles.headerLogo} href="/demo/">
                 <div className={styles.backtoMenu}>
@@ -56,7 +52,7 @@ const Header = () => {
                 />
               </Link>
             </div>
-          </AppBar>
+          </div>
         </Box>
       ) : (
         "menü"
