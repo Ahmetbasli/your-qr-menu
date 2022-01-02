@@ -15,20 +15,8 @@ import { selectCategories } from "../../slices/categorySlice";
 import { useSelector } from "react-redux";
 import ShareableDeleteIconforCards from "../Common/ShareableDeleteIconforCards/ShareableDeleteIconforCards";
 import EditIconOfProductCard from "../EditIconOfProductCard/EditIconOfProductCard";
-const cardStyle = {
-  // backgroundColor: "#CBC3E3",
-  card: {
-    //height: "330px",
-    width: "300px",
-  },
-  img: {
-    height: "200px",
-    objectFit: "cover",
-  },
-  options: {
-    justifyContent: "center",
-  },
-};
+import styles from "./ProductCard.module.css";
+import Image from "next/image";
 function ProductCard({
   title,
   description,
@@ -38,41 +26,45 @@ function ProductCard({
   categoryIdOfProductFeed,
 }) {
   const stopCardClickEventOnCardActionsArea = (event) => {
-    // event.stopPropagation();
+    //event.stopPropagation();
   };
-
   return (
-    <Card style={cardStyle.card}>
-      <CardActionArea>
-        {productImage && (
-          <CardMedia
-            style={cardStyle.img}
-            component="img"
-            image={`https://menuhub-backend.herokuapp.com/upload/${productImage}`}
-            alt="green iguana"
-          />
-        )}
-        <CardContent>
-          <Typography gutterBottom variant="h4" align="center" component="div">
-            {title}
-          </Typography>
-          <Typography gutterBottom variant="h5" align="center" component="div">
-            {description ? description : ""}
-          </Typography>
-          <Typography gutterBottom variant="p" align="center" component="div">
-            {price ? price : ""}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+    <>
+      <div className={styles.card}>
+        <div>
+          {productImage && (
+            <div className={styles.imgContainer}>
+              <Image
+                className={styles.img}
+                src={`https://menuhub-backend.herokuapp.com/upload/${productImage}`}
+                alt={title}
+                layout="fill"
+              />
+            </div>
+          )}
+          <div className={productImage ? styles.info : styles.infoNoImg}>
+            <h3 className={styles.title}>{title}</h3>
+            {description !== "undefined" ? (
+              <h4 className={styles.description}>{description}</h4>
+            ) : (
+              " fsdf "
+            )}
+            {price !== "undefined" ? (
+              <h5 className={styles.price}>{price} ₺</h5>
+            ) : (
+              " "
+            )}
+          </div>
+        </div>
+      </div>
       <CardActions
-        style={cardStyle.options}
         onClick={(event) => stopCardClickEventOnCardActionsArea(event)}
-        style={cardStyle.options}
+        //style={cardStyle.options}
       >
         <ShareableDeleteIconforCards id={id} />
         <EditIconOfProductCard id={id} />
       </CardActions>
-    </Card>
+    </>
   );
 }
 
