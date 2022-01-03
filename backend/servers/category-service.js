@@ -17,6 +17,11 @@ class CategoryService extends BaseService {
 
     await category.save();
   }
+
+  async addNewCategoryToaBusiness(business, category) {
+    business.categories.push(category);
+    await business.save();
+  }
 }
 
 module.exports = new CategoryService();

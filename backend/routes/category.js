@@ -4,7 +4,6 @@ const upload = require("../multer");
 const CategoryService = require("../servers/category-service");
 
 router.get("/find/:id", async (req, res) => {
-  console.log("2222");
   const category = await CategoryService.find(req.params.id);
   res.send(category);
 });
