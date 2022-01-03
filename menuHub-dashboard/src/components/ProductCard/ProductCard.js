@@ -25,25 +25,45 @@ function ProductCard({
   };
   return (
     <>
-      <div className={styles.card}>
-        <div>
-          {productImage && (
-            <div className={styles.imgContainer}>
-              <Image
-                className={styles.img}
-                src={`https://menuhub-backend.herokuapp.com/upload/${productImage}`}
-                alt={title}
-                layout="fill"
-              />
-            </div>
-          )}
-          <div className={productImage ? styles.info : styles.infoNoImg}>
-            <h3 className={styles.title}>{title}</h3>
-            {description !== "undefined" && description !== "null" ? (
-              <h4 className={styles.description}>{description}</h4>
-            ) : (
-              "  "
+      {productImage ? (
+        <div className={styles.card}>
+          <div>
+            {productImage && (
+              <div className={styles.imgContainer}>
+                <Image
+                  className={styles.img}
+                  src={`https://menuhub-backend.herokuapp.com/upload/${productImage}`}
+                  alt={title}
+                  layout="fill"
+                />
+              </div>
             )}
+            <div className={productImage ? styles.info : styles.infoNoImg}>
+              <h3 className={styles.title}>{title}</h3>
+              {description !== "undefined" && description !== "null" ? (
+                <h4 className={styles.description}>{description}</h4>
+              ) : (
+                "  "
+              )}
+              {price !== "undefined" && price !== "null" ? (
+                <h5 className={styles.price}>{price} ₺</h5>
+              ) : (
+                " "
+              )}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.card}>
+          <div className={styles.infoNoImg}>
+            <div className={styles.titleDescriptionWrapper}>
+              <h3 className={styles.title}>{title}</h3>
+              {description !== "undefined" && description !== "null" ? (
+                <h4 className={styles.description}>{description}</h4>
+              ) : (
+                "  "
+              )}
+            </div>
             {price !== "undefined" && price !== "null" ? (
               <h5 className={styles.price}>{price} ₺</h5>
             ) : (
@@ -51,7 +71,7 @@ function ProductCard({
             )}
           </div>
         </div>
-      </div>
+      )}
       <CardActions
         onClick={(event) => stopCardClickEventOnCardActionsArea(event)}
         //style={cardStyle.options}
