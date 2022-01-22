@@ -25,14 +25,14 @@ router.post("/create", upload.single("businessLogo"), async (req, res) => {
   const response = await BusinessService.add(data);
   res.send(response);
 });
-// router.get("/find/:id", async (req, res) => {
-//   const Business = await BusinessService.find(req.params.id);
-//   res.send(Business);
-// });
-// router.get("/all", async (req, res) => {
-//   const allCategories = await BusinessService.findAll();
-//   res.send(allCategories);
-// });
+router.get("/find/:id", async (req, res) => {
+  const Business = await BusinessService.find(req.params.id);
+  res.send(Business);
+});
+router.get("/all", async (req, res) => {
+  const allBusinesses = await BusinessService.findAll();
+  res.send(allBusinesses);
+});
 
 // router.put("/update/:id", upload.single("BusinessImage"), async (req, res) => {
 //   const Business = await BusinessService.find(req.params.id);
@@ -49,12 +49,12 @@ router.post("/create", upload.single("businessLogo"), async (req, res) => {
 //   res.send(data);
 // });
 
-// router.delete("/delete/:id", async (req, res) => {
-//   const Business = await BusinessService.find(req.params.id);
+router.delete("/delete/:id", async (req, res) => {
+  const Business = await BusinessService.find(req.params.id);
 
-//   const { id } = req.params;
-//   await BusinessService.del({ _id: id });
-//   res.send(Business);
-// });
+  const { id } = req.params;
+  await BusinessService.del({ _id: id });
+  res.send(Business);
+});
 
 module.exports = router;

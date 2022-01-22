@@ -28,7 +28,7 @@ router.post(
     res.send(category);
   }
 );
-//
+
 router.put("/update/:id", upload.single("productImage"), async (req, res) => {
   const product = await ProductService.find(req.params.id);
   console.log(req.body);

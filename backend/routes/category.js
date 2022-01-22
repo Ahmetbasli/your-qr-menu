@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../multer");
+const BusinessService = require("../servers/Business-service");
 const CategoryService = require("../servers/category-service");
 
 router.get("/find/:id", async (req, res) => {
@@ -12,15 +13,19 @@ router.get("/all", async (req, res) => {
   res.send(allCategories);
 });
 
-router.post("/create", upload.single("categoryImage"), async (req, res) => {
+router.post("/create/:businessId", upload.single("categoryImage"), async (req, res) => {
   const data = {
     title: req.body.title,
     categoryImage: req.file?.filename,
     categoryImageOriginalName: req.file?.originalname,
     products: [],
   };
-  const response = await CategoryService.add(data);
-  res.send(response);
+  const newCategory = await CategoryService.add(data);
+
+  const business = await BusinessService.find({ _id: req.params.businessId });
+  await CategoryService.addNewCategoryToaBusiness(business, newCategory);
+
+  res.send(business);
 });
 
 router.put("/update/:id", upload.single("categoryImage"), async (req, res) => {
