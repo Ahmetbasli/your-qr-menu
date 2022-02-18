@@ -13,20 +13,24 @@ router.get("/all", async (req, res) => {
   res.send(allCategories);
 });
 
-router.post("/create/:businessId", upload.single("categoryImage"), async (req, res) => {
-  const data = {
-    title: req.body.title,
-    categoryImage: req.file?.filename,
-    categoryImageOriginalName: req.file?.originalname,
-    products: [],
-  };
-  const newCategory = await CategoryService.add(data);
+router.post(
+  "/create/:businessId",
+  upload.single("categoryImage"),
+  async (req, res) => {
+    const data = {
+      title: req.body.title,
+      categoryImage: req.file?.filename,
+      categoryImageOriginalName: req.file?.originalname,
+      products: [],
+    };
+    const newCategory = await CategoryService.add(data);
 
-  const business = await BusinessService.find({ _id: req.params.businessId });
-  await CategoryService.addNewCategoryToaBusiness(business, newCategory);
+    const business = await BusinessService.find({ _id: req.params.businessId });
+    await CategoryService.addNewCategoryToaBusiness(business, newCategory);
 
-  res.send(business);
-});
+    res.send(business);
+  }
+);
 
 router.put("/update/:id", upload.single("categoryImage"), async (req, res) => {
   const category = await CategoryService.find(req.params.id);
@@ -39,7 +43,7 @@ router.put("/update/:id", upload.single("categoryImage"), async (req, res) => {
   };
 
   CategoryService.update(category, data);
-  //
+
   res.send(data);
 });
 
