@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../multer");
-const BusinessService = require("../servers/Business-service");
+const BusinessService = require("../servers/business-service");
 const CategoryService = require("../servers/category-service");
 
 router.get("/find/:id", async (req, res) => {

@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../multer");
-const BusinessService = require("../servers/Business-service");
+const BusinessService = require("../servers/business-service");
 
 router.post("/create", upload.single("businessLogo"), async (req, res) => {
-  console.log("crating");
   const businessData = req.body;
   const data = {
     name: businessData.name,
@@ -30,7 +29,6 @@ router.post("/create", upload.single("businessLogo"), async (req, res) => {
 router.get("/find/:id", async (req, res) => {
   const Business = await BusinessService.find(req.params.id);
   Business.password = null;
-  console.log(Business);
 
   res.send(Business);
 });
